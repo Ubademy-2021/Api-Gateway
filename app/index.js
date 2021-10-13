@@ -27,6 +27,18 @@ userServiceRouter.route('/users')
 userServiceRouter.route('/users/:id')
   .get(userServiceController.getUserById)
 
+userServiceRouter.route('/categories')
+  .get(userServiceController.getCourseCategories)
+
+userServiceRouter.route('/categories/:userId')
+  .get(userServiceController.getUserCourseCategories)
+
+userServiceRouter.route('/categories')
+  .post(userServiceController.createCategorie)
+
+userServiceRouter.route('/categories/user')
+  .post(userServiceController.addCategoryToUser)
+
 app.use("/api-gateway", userServiceRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
