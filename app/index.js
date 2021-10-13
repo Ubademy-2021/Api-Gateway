@@ -24,6 +24,9 @@ userServiceRouter.route('/users')
 userServiceRouter.route('/users')
   .post(userServiceController.createUser)
 
+userServiceRouter.route('/users/:id')
+  .get(userServiceController.getUserById)
+
 app.use("/api-gateway", userServiceRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
