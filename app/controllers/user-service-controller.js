@@ -15,6 +15,20 @@ exports.getUsers = (req, response) => {
     })
 }
 
+exports.getUserById = (req, response) => { 
+  console.log("Getting user with id: " + req.params.id)
+
+  axios.get('https://ubademy-user-service.herokuapp.com/api/users/' + req.params.id)
+    .then((res) => {
+        console.log(`Status: ${res.status}`);
+        console.log('Body: ', res.data);
+        response.json(res.data)
+      }).catch((err) => {
+        console.log(err.response.data.detail)
+        response.send(err.response.data.detail)
+    })
+}
+
 exports.createUser = (req, response) => { 
   console.log("Creating user")
 
