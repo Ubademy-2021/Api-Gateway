@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 userServiceRouter.route('/users')
   .get(userServiceController.getUsers)
 
+userServiceRouter.route('/users')
+  .post(userServiceController.createUser)
 
 app.use("/api-gateway", userServiceRouter);
 app.use(express.static(path.join(__dirname, 'public')));
