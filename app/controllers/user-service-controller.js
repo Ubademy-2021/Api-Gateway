@@ -1,48 +1,30 @@
 const serialize = require('serialize-javascript');
 const deserialize = str => eval(`(${str})`);
-const https = require('https')
+const axios = require('axios');
 
-const buildResponse = data => ({
-  status: 'OK',
-  data,
-});
+exports.getUsers = (req, response) => { 
+  console.log("Getting users from user service")
 
-const buildError = err => ({
-  status: 'ERROR',
-  error: err.toString(),
-});
-
-exports.getUsers = (requ, resp) => {
-  console.log("request: getUsers")
-
-  const options = {
-    hostname: 'ubademy-user-service.herokuapp.com',
-    path: '/api/users',
-    method: 'GET'
-  }
-
-  let output = '';
-
-  const req = https.request(options, res => {
-    console.log(`${options.hostname} : ${res.statusCode}`);
-    res.setEncoding('utf8');
-
-    res.on('data', (chunk) => {
-      output += chunk;
-    });
-
-    res.on('end', () => {
-      let obj = JSON.parse(output);
-      console.log("Users found: ", obj)
-      
-      resp.send(obj)
-      resp.status(200)
+  axios.get('https://ubademy-user-service.herokuapp.com/api/users')
+    .then((res) => {
+        console.log(`Status: ${res.status}`);
+        response.json(res.data)
+      }).catch((err) => {
+        console.log(err.response.data.detail)
+        response.send(err.response.data.detail)
     })
-  })
+}
 
-  req.on('error', (err) => {
-    resp.send('error: ' + err.message);
-  })
+exports.createUser = (req, response) => { 
+  console.log("Creating user")
 
-  req.end()
+  axios.post('https://ubademy-user-service.herokuapp.com/api/users', req.body)
+    .then((res) => {
+        console.log(`Status: ${res.status}`);
+        console.log('Body: ', res.data.id);
+        response.json(res.data.id)
+      }).catch((err) => {
+        console.log(err.response.data.detail)
+        response.send(err.response.data.detail)
+    })
 }
