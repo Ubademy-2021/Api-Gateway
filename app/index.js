@@ -27,6 +27,9 @@ userServiceRouter.route('/users')
 userServiceRouter.route('/users/:id')
   .get(userServiceController.getUserById)
 
+userServiceRouter.route('/users/:id')
+  .put(userServiceController.updateUserById)
+
 userServiceRouter.route('/categories')
   .get(userServiceController.getCourseCategories)
 

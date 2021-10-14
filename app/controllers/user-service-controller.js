@@ -29,6 +29,20 @@ exports.getUserById = (req, response) => {
     })
 }
 
+exports.updateUserById = (req, response) => { 
+  console.log("Updating user with id: " + req.params.id)
+
+  axios.put('https://ubademy-user-service.herokuapp.com/api/users/' + req.params.id, req.body)
+    .then((res) => {
+        console.log(`Status: ${res.status}`);
+        console.log('Body: ', res.data);
+        response.json(res.data)
+      }).catch((err) => {
+        console.log(err.response.data.detail)
+        response.status(400).send(err.response.data.detail)
+    })
+}
+
 exports.getCourseCategories = (req, response) => { 
   console.log("Getting course categories")
 
