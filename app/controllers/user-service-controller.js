@@ -77,8 +77,8 @@ exports.createCategorie = (req, response) => {
   axios.post('https://ubademy-user-service.herokuapp.com/api/categories', req.body)
     .then((res) => {
         console.log(`Status: ${res.status}`);
-        console.log('Body: ', res.data.id);
-        response.status(201).json(res.data.id)
+        console.log('Body: ', res.data);
+        response.status(201).json(res.data)
       }).catch((err) => {
         console.log(err.response.data.detail)
         response.status(400).send(err.response.data.detail)
@@ -91,8 +91,8 @@ exports.addCategoryToUser = (req, response) => {
   axios.post('https://ubademy-user-service.herokuapp.com/api/categories/user', req.body)
     .then((res) => {
         console.log(`Status: ${res.status}`);
-        console.log('Body: ', res.data.id);
-        response.status(201).json(res.data.id)
+        console.log('Body: ', res.data);
+        response.status(201).json(res.data)
       }).catch((err) => {
         console.log(err.response.data.detail)
         response.status(400).send(err.response.data.detail)
@@ -105,8 +105,8 @@ exports.createUser = (req, response) => {
   axios.post('https://ubademy-user-service.herokuapp.com/api/users', req.body)
     .then((res) => {
         console.log(`Status: ${res.status}`);
-        console.log('Body: ', res.data.id);
-        response.status(201).json(res.data.id)
+        console.log('Body: ', res.data);
+        response.status(201).json(res.data)
       }).catch((err) => {
         console.log(err.response.data.detail)
         response.status(400).send(err.response.data.detail)
