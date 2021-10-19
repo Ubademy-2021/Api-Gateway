@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [ feature/workflows-and-linter ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
