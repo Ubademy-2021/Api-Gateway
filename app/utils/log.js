@@ -1,4 +1,6 @@
 const { log } = require('../config')
+const tracer = require('dd-trace');
+const formats = require('dd-trace/ext/formats');
 
 const logInfo = function(message){
   if (log.info){
@@ -37,9 +39,22 @@ const getDate = function(){
     return (year + "-" +  month + "-" +  day + " " + hours + ":" + minutes + ":" + seconds);
 }
 
+const logTest= function(level, message) {
+    const span = tracer.scope().active();
+    const time = new Date().toISOString();
+    const record = { time, level, message };
+
+    if (span) {
+        tracer.inject(formats.LOG, span.context(), record);
+    }
+
+    console.log(JSON.stringify(record));
+}
+
 module.exports = {
   logInfo,
   logDebug,
   logWarn,
-  logError
+  logError,
+  logTest
 }
