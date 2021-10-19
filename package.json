@@ -4,12 +4,15 @@
   "description": "Api-Gateway for Ubademy",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js", 
+    "test": "mocha || true"
   },
   "keywords": [
     "nodejs"
   ],
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
     "body-parser": "1.17.2",
     "datadog-winston": "^1.5.1",
     "dd-trace": "^1.5.0",
@@ -19,5 +22,15 @@
     "winston": "^3.3.3"
   },
   "author": "ffabbiano",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0"
+  }
 }
