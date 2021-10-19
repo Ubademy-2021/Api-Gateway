@@ -5,7 +5,7 @@ on:
   # but only for the main branch
   push:
     branches:
-      - feature/workflows-and-linter
+      - main
   pull_request:
     branches:
       - main
