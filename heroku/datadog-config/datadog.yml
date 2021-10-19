@@ -1,4 +1,4 @@
-hostname: nombre-de-prueba-datadog
+hostname: api-gateway-agent
 listeners:
   - name: docker
 config_providers:
