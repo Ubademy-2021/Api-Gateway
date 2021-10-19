@@ -4,7 +4,7 @@ const {logError, logInfo} = require("../utils/log");
 exports.getUsers = (req, response) => {
   logInfo("Getting users from user service");
 
-  axios.get("https://ubademy-user-service.herokuapp.com/api/users")
+  axios.get('https://ubademy-user-service.herokuapp.com/api/users')
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
