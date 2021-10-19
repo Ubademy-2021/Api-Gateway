@@ -1,54 +1,46 @@
 const { log } = require('../config')
-const tracer = require('dd-trace');
-const formats = require('dd-trace/ext/formats');
+const winston = require('winston');
+
+const { createLogger, format, transports } = require('winston');
+
+const logConfiguration = {
+    'transports': [
+        new winston.transports.File({
+            filename: 'logs/api_gateway.log'
+        })
+    ],
+    format: winston.format.combine(
+        winston.format.timestamp({
+           format: 'MMM-DD-YYYY HH:mm:ss'
+       }),
+        winston.format.printf(info => `${info.level}: | ${[info.timestamp]} | ${info.message}`),
+    )
+};
+
+const logger = winston.createLogger(logConfiguration);
 
 const logInfo = function(message){
-  if (log.info){
-    console.log('INFO: | ' + getDate() + " | " + message);
-  }
+    if (log.info){
+        logger.info(message)
+    }
 }
 
 const logDebug = function(message){
-  if (log.debug){
-    console.log('DEBUG: | ' + getDate() + " | " + message);
-  }
+    if (log.debug){
+        logger.debug(message)
+    }
 }
 
 const logWarn = function(message){
-  if (log.warn){
-    console.log('WARN: | ' + getDate() + " | " + message);
-  }
+    if (log.warn){
+        logger.warn(message)
+    }
 }
 
 const logError = function(message){
-  if (log.error){
-    console.log('ERROR: | ' + getDate() + " | " + message);
-  }
-}
-
-const getDate = function(){
-    date = new Date()
-    
-    year = date.getFullYear()
-    month = date.getMonth() + 1
-    day = ("0" + date.getDate()).slice(-2)
-    hours = ("0" + date.getHours()).slice(-2)
-    minutes = ("0" + date.getMinutes()).slice(-2)
-    seconds = date.getSeconds()
-
-    return (year + "-" +  month + "-" +  day + " " + hours + ":" + minutes + ":" + seconds);
-}
-
-const logTest= function(level, message) {
-    const span = tracer.scope().active();
-    const time = new Date().toISOString();
-    const record = { time, level, message };
-
-    if (span) {
-        tracer.inject(formats.LOG, span.context(), record);
+    if (log.error){
+        logger.error(message)
     }
-
-    console.log(JSON.stringify(record));
 }
 
 module.exports = {
@@ -56,5 +48,4 @@ module.exports = {
   logDebug,
   logWarn,
   logError,
-  logTest
 }
