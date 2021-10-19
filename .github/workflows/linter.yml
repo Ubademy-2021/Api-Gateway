@@ -4,7 +4,8 @@ on:
     paths-ignore:
       - 'docs/**'
     branches:
-      - [main,feature/workflows-and-linter]
+      - main
+      - feature/workflows-and-linter
   pull_request:
     paths-ignore:
       - 'docs/**'
