@@ -3,7 +3,7 @@
 // Datadog config: this line must come before importing any instrumented module.
 const tracer = require('dd-trace').init({
   logInjection: true,
-  service: 'test'
+  service: 'api-gateway'
 });
 
 const path = require('path');
@@ -11,7 +11,7 @@ const express = require('express');
 const userServiceController = require('./controllers/user-service-controller');
 const bodyParser = require('body-parser');
 const { port } = require('./config')
-const { logTest } = require('./utils/log')
+const { logInfo } = require('./utils/log');
 
 // App
 const app = express();
@@ -51,4 +51,4 @@ app.use("/api-gateway", userServiceRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port);
-logTest('info', `Running on port ${port}`);
+logInfo(`Running on port ${port}`);
