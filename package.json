@@ -1,7 +1,23 @@
 {
-  "name": "workshop-3",
-  "version": "0.1.0",
+  "name": "api_gateway",
+  "version": "1.0.1",
+  "description": "Api-Gateway for Ubademy",
+  "main": "index.js",
   "scripts": {
-    "postinstall": "npm install --prefix app && npm install --prefix web"
-  }
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "dependencies": {
+    "body-parser": "1.17.2",
+    "datadog-winston": "^1.5.1",
+    "dd-trace": "^1.5.0",
+    "express": "^4.13.3",
+    "node-rules": "3.1.0",
+    "serialize-javascript": "^1.4.0",
+    "winston": "^3.3.3"
+  },
+  "author": "ffabbiano",
+  "license": "ISC"
 }
