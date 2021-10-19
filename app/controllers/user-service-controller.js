@@ -1,8 +1,8 @@
-const axios = require('axios');
-const {logError, logInfo} = require('../utils/log');
+const axios = require("axios");
+const {logError, logInfo} = require("../utils/log");
 
 exports.getUsers = (req, response) => {
-  logInfo('Getting users from user service');
+  logInfo("Getting users from user service");
 
   axios.get("https://ubademy-user-service.herokuapp.com/api/users")
       .then((res) => {
@@ -15,12 +15,12 @@ exports.getUsers = (req, response) => {
 };
 
 exports.getUserById = (req, response) => {
-  logInfo('Getting user with id: ' + req.params.id);
+  logInfo("Getting user with id: " + req.params.id);
 
-  axios.get('https://ubademy-user-service.herokuapp.com/api/users/' + req.params.id)
+  axios.get("https://ubademy-user-service.herokuapp.com/api/users/" + req.params.id)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
@@ -29,12 +29,12 @@ exports.getUserById = (req, response) => {
 };
 
 exports.updateUserById = (req, response) => {
-  logInfo('Updating user with id: ' + req.params.id);
+  logInfo("Updating user with id: " + req.params.id);
 
-  axios.put('https://ubademy-user-service.herokuapp.com/api/users/' + req.params.id, req.body)
+  axios.put("https://ubademy-user-service.herokuapp.com/api/users/" + req.params.id, req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
@@ -43,12 +43,12 @@ exports.updateUserById = (req, response) => {
 };
 
 exports.getCourseCategories = (req, response) => {
-  logInfo('Getting course categories');
+  logInfo("Getting course categories");
 
-  axios.get('https://ubademy-user-service.herokuapp.com/api/categories')
+  axios.get("https://ubademy-user-service.herokuapp.com/api/categories")
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
@@ -57,12 +57,12 @@ exports.getCourseCategories = (req, response) => {
 };
 
 exports.getUserCourseCategories = (req, response) => {
-  logInfo('Getting course categories for user with id: ' + req.params.userId);
+  logInfo("Getting course categories for user with id: " + req.params.userId);
 
-  axios.get('https://ubademy-user-service.herokuapp.com/api/categories/' + req.params.userId)
+  axios.get("https://ubademy-user-service.herokuapp.com/api/categories/" + req.params.userId)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
@@ -71,12 +71,12 @@ exports.getUserCourseCategories = (req, response) => {
 };
 
 exports.createCategorie = (req, response) => {
-  logInfo('Creating categories');
+  logInfo("Creating categories");
 
-  axios.post('https://ubademy-user-service.herokuapp.com/api/categories', req.body)
+  axios.post("https://ubademy-user-service.herokuapp.com/api/categories", req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.status(201).json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
@@ -85,12 +85,12 @@ exports.createCategorie = (req, response) => {
 };
 
 exports.addCategoryToUser = (req, response) => {
-  logInfo('Adding category to user');
+  logInfo("Adding category to user");
 
-  axios.post('https://ubademy-user-service.herokuapp.com/api/categories/user', req.body)
+  axios.post("https://ubademy-user-service.herokuapp.com/api/categories/user", req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.status(201).json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
@@ -99,12 +99,12 @@ exports.addCategoryToUser = (req, response) => {
 };
 
 exports.createUser = (req, response) => {
-  logInfo('Creating user');
+  logInfo("Creating user");
 
-  axios.post('https://ubademy-user-service.herokuapp.com/api/users', req.body)
+  axios.post("https://ubademy-user-service.herokuapp.com/api/users", req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
-        logInfo('Body: ', res.data);
+        logInfo("Body: ", res.data);
         response.status(201).json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
