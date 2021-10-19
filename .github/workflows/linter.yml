@@ -8,8 +8,6 @@ on:
   pull_request:
     paths-ignore:
       - 'docs/**'
-      - '.github/**'
-      - 'logs/**'
     branches:
       - '**'
 jobs:
