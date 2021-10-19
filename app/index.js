@@ -5,6 +5,7 @@ const express = require('express');
 const userServiceController = require('./controllers/user-service-controller');
 const bodyParser = require('body-parser');
 const { port } = require('./config')
+const { logInfo } = require('./utils/log')
 
 // App
 const app = express();
@@ -44,4 +45,4 @@ app.use("/api-gateway", userServiceRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port);
-console.log(`Running on port ${port}`);
+logInfo(`Running on port ${port}`);
