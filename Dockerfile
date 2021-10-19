@@ -9,6 +9,8 @@ ENV DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
 ENV DD_DYNO_HOST=false
 ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
 ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
+ENV DD_API_KEY=062c1dd4e419aafe262695d8ca5f966e
+ENV DD_SITE="datadoghq.com"
 
 # Add Datadog repository and signing keys
 RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
