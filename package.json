@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "nyc --reporter=lcov mocha",
-    "coverage": "codecov"
+    "test": "jest --coverage"
   },
   "keywords": [
     "nodejs"
@@ -34,8 +33,6 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "jscoverage": "^0.6.0",
-    "nodeunit": "^0.11.3",
-    "nyc": "^15.1.0"
+    "jest": "^26.6.3"
   }
 }
