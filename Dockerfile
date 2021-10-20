@@ -4,13 +4,8 @@ FROM node:14.16.1
 RUN apt-get install -y gpg apt-transport-https gpg-agent curl ca-certificates
 
 # Datadog ENVs
-ENV DD_APM_ENABLED=true
-ENV DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-ENV DD_DYNO_HOST=false
 ENV DATADOG_APT_KEYRING="/usr/share/keyrings/datadog-archive-keyring.gpg"
 ENV DATADOG_APT_KEYS_URL="https://keys.datadoghq.com"
-ENV DD_API_KEY=062c1dd4e419aafe262695d8ca5f966e
-ENV DD_SITE="datadoghq.com"
 
 # Add Datadog repository and signing keys
 RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
@@ -39,8 +34,9 @@ RUN cd -
 
 # Expose DogStatsD and trace-agent ports
 EXPOSE 8125/udp 8126/tcp
+ENV DD_APM_ENABLED=true
 
-EXPOSE $PORT
+EXPOSE 5000
 
 # Copy Datadog configuration
 COPY heroku/datadog-config/ /etc/datadog-agent/
