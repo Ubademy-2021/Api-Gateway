@@ -37,6 +37,11 @@ RUN npm install axios
 RUN npm install --save dd-trace
 RUN cd -
 
+# Expose DogStatsD and trace-agent ports
+EXPOSE 8125/udp 8126/tcp
+
+EXPOSE $PORT
+
 # Copy Datadog configuration
 COPY heroku/datadog-config/ /etc/datadog-agent/
 
