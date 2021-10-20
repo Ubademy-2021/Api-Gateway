@@ -3,9 +3,6 @@ name: Linters
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -26,6 +23,7 @@ jobs:
 
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
+        run: npm install
         run: npm ci
 
       - name: Run linters
