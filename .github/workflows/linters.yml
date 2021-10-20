@@ -1,14 +1,8 @@
 name: Linters
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   run-linters:
@@ -26,8 +20,9 @@ jobs:
 
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
+        run: npm install
+      - name: Install npm ci
         run: npm ci
-
       - name: Run linters
         uses: wearerequired/lint-action@v1
         with:

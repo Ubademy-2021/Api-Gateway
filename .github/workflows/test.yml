@@ -1,8 +1,6 @@
 name: Tests
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -15,4 +13,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14.16'
-      - run: npm test
+      - name: Install dependencies
+        run: npm install
+      - name: Run the tests
+        run: npm test
