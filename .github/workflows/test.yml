@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ feature/test-user-service-controller ]
   pull_request:
     branches: [ main ]
 
@@ -15,4 +15,4 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14.16'
-      - run: npm test
+      - run: npm test -- --coverage
