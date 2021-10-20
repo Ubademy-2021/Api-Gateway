@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ feature/test-user-service-controller ]
   pull_request:
     branches: [ main ]
 
