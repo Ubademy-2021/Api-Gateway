@@ -18,7 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Install dependencies for codecov
-        run: npm i nyc --save-dev
       - name: Run the tests
         run: npm test
       - name: Upload coverage to Codecov
