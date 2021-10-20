@@ -31,7 +31,6 @@ RUN npm install
 RUN npm install axios
 RUN npm install --save dd-trace
 RUN cd -
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Expose DogStatsD and trace-agent ports
 EXPOSE 8125/udp 8126/tcp
