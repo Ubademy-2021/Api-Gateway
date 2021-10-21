@@ -11,7 +11,7 @@ const path = require("path");
 const express = require("express");
 const userServiceController = require("./controllers/user-service-controller");
 const bodyParser = require("body-parser");
-const { port } = require("./config");
+const { port, base_heroku_url } = require("./config");
 const { logInfo } = require("./utils/log");
 
 // App
@@ -55,3 +55,4 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(port);
 logInfo(`Running on port ${port}`);
+logInfo(`Config var BASE_HEROKU_URL is ${base_heroku_url}`);
