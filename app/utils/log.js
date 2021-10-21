@@ -4,8 +4,9 @@ const winston = require("winston");
 const logConfiguration = {
     "transports": [
         new winston.transports.File({
-            filename: "logs/api_gateway.log"
-        })
+            filename: "logs/api_gateway.log",
+        }),
+        new winston.transports.Console()
     ],
     format: winston.format.combine(
         winston.format.timestamp({
