@@ -1,11 +1,11 @@
 const axios = require("axios");
-const { heroku_url } = require("../config");
+const { base_heroku_url } = require("../config");
 const {logError, logInfo} = require("../utils/log");
 
 exports.getUsers = (req, response) => {
   logInfo("Getting users from user service");
 
-  axios.get(`${heroku_url}/api/users`)
+  axios.get(`${base_heroku_url}/api/users`)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
@@ -18,7 +18,7 @@ exports.getUsers = (req, response) => {
 exports.getUserById = (req, response) => {
   logInfo("Getting user with id: " + req.params.id);
 
-  axios.get("https://ubademy-user-service.herokuapp.com/api/users/" + req.params.id)
+  axios.get(`${base_heroku_url}/api/users/` + req.params.id)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
@@ -31,7 +31,7 @@ exports.getUserById = (req, response) => {
 exports.updateUserById = (req, response) => {
   logInfo("Updating user with id: " + req.params.id);
 
-  axios.put(`${heroku_url}/api/users/` + req.params.id, req.body)
+  axios.put(`${base_heroku_url}/api/users/` + req.params.id, req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
@@ -44,7 +44,7 @@ exports.updateUserById = (req, response) => {
 exports.getCourseCategories = (req, response) => {
   logInfo("Getting course categories");
 
-  axios.get(`${heroku_url}/api/categories`)
+  axios.get(`${base_heroku_url}/api/categories`)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
@@ -57,7 +57,7 @@ exports.getCourseCategories = (req, response) => {
 exports.getUserCourseCategories = (req, response) => {
   logInfo("Getting course categories for user with id: " + req.params.userId);
 
-  axios.get(`${heroku_url}/api/categories/` + req.params.userId)
+  axios.get(`${base_heroku_url}/api/categories/` + req.params.userId)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
@@ -70,7 +70,7 @@ exports.getUserCourseCategories = (req, response) => {
 exports.createCategorie = (req, response) => {
   logInfo("Creating categories");
 
-  axios.post(`${heroku_url}/api/categories`, req.body)
+  axios.post(`${base_heroku_url}/api/categories`, req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.status(201).json(res.data);
@@ -83,7 +83,7 @@ exports.createCategorie = (req, response) => {
 exports.addCategoryToUser = (req, response) => {
   logInfo("Adding category to user");
 
-  axios.post(`${heroku_url}/api/categories/user`, req.body)
+  axios.post(`${base_heroku_url}/api/categories/user`, req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.status(201).json(res.data);
@@ -96,7 +96,7 @@ exports.addCategoryToUser = (req, response) => {
 exports.createUser = (req, response) => {
   logInfo("Creating user");
 
-  axios.post(`${heroku_url}/api/users`, req.body)
+  axios.post(`${base_heroku_url}/api/users`, req.body)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.status(201).json(res.data);
