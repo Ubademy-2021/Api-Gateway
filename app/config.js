@@ -6,5 +6,6 @@ module.exports = {
       warn: process.env.LOG_WARN == undefined || process.env.LOG_WARN == "true",
       info: process.env.LOG_INFO == undefined || process.env.LOG_INFO == "true",
       debug: process.env.LOG_DEBUG == undefined || process.env.LOG_DEBUG == "true",
-    }
+    },
+    heroku_url: process.env.HEROKU_URL || "https://ubademy-user-service.herokuapp.com"
 };
