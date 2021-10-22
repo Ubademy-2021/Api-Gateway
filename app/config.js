@@ -7,5 +7,5 @@ module.exports = {
       info: process.env.LOG_INFO == undefined || process.env.LOG_INFO == "true",
       debug: process.env.LOG_DEBUG == undefined || process.env.LOG_DEBUG == "true",
     },
-    base_heroku_url: process.env.BASE_HEROKU_URL || "https://ubademy-user-service.herokuapp.com"
+    base_heroku_url: "https://ubademy-user-service.herokuapp.com"
 };
