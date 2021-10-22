@@ -2,8 +2,12 @@ name: Code Coverage
 
 on:
   push:
+    paths-ignore:
+      - 'config.js'
     branches: [ main ]
   pull_request:
+    paths-ignore:
+      - 'config.js'
     branches: [ main ]
 
 jobs:

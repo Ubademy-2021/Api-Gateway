@@ -3,7 +3,11 @@ name: Tests
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'config.js'
   pull_request:
+    paths-ignore:
+      - 'config.js'
     branches: [ main ]
 
 jobs:
