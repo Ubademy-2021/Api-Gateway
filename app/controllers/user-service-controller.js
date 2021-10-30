@@ -2,23 +2,19 @@ const axios = require("axios");
 const { base_user_service_url } = require("../config");
 const {logError, logInfo} = require("../utils/log");
 
-exports.getUsers = (req, response) => {
+exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
+  logInfo("Query params - user_id: " + req.query["user_id"]);
+  logInfo("Query params - email: " + req.query["email"]);
 
-  axios.get(`${base_user_service_url}/api/users`)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
-};
+  var url = `${base_user_service_url}/api/users`;
 
-exports.getUserById = (req, response) => {
-  logInfo("Getting user with id: " + req.params.id);
+  if (req.query["user_id"]){
+    url = `${base_user_service_url}/api/users?user_id=` + req.query["user_id"];
+  } else if (req.query["email"])
+    url = `${base_user_service_url}/api/users?email=` + req.query["email"];
 
-  axios.get(`${base_user_service_url}/api/users/` + req.params.id)
+  axios.get(url)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
