@@ -1,11 +1,15 @@
 const axios = require("axios");
 const { base_user_service_url } = require("../config");
 const {logError, logInfo} = require("../utils/log");
+const { manageAuthToken } = require("../services/api-gateway-service");
 
 exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
   logInfo("Query params - user_id: " + req.query["user_id"]);
   logInfo("Query params - email: " + req.query["email"]);
+  logInfo("Header: " + req.headers["firebase_authentication"]);
+
+  manageAuthToken(req.headers);
 
   var url = `${base_user_service_url}/api/users`;
 
@@ -23,6 +27,7 @@ exports.getUser = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
 
 exports.updateUserById = (req, response) => {
   logInfo("Updating user with id: " + req.params.id);
