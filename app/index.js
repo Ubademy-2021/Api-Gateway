@@ -23,6 +23,7 @@ var apiGatewayRouter = express.Router();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+// User-Service
 apiGatewayRouter.route("/users")
   .post(userServiceController.createUser);
 
@@ -43,6 +44,9 @@ apiGatewayRouter.route("/categories")
 
 apiGatewayRouter.route("/categories/user")
   .post(userServiceController.addCategoryToUser);
+
+apiGatewayRouter.route("/users/login")
+  .get(userServiceController.login);
 
 app.use("/api-gateway", apiGatewayRouter);
 
