@@ -18,37 +18,37 @@ const { logInfo } = require("./utils/log");
 const app = express();
 
 // API routes
-var userServiceRouter = express.Router();
+var apiGatewayRouter = express.Router();
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-// Routing
-userServiceRouter.route("/users")
-  .get(userServiceController.getUsers);
-
-userServiceRouter.route("/users")
+// User-Service
+apiGatewayRouter.route("/users")
   .post(userServiceController.createUser);
 
-userServiceRouter.route("/users/:id")
-  .get(userServiceController.getUserById);
+apiGatewayRouter.route("/users")
+  .get(userServiceController.getUser);
 
-userServiceRouter.route("/users/:id")
+apiGatewayRouter.route("/users/:id")
   .put(userServiceController.updateUserById);
 
-userServiceRouter.route("/categories")
+apiGatewayRouter.route("/categories")
   .get(userServiceController.getCourseCategories);
 
-userServiceRouter.route("/categories/:userId")
+apiGatewayRouter.route("/categories/:userId")
   .get(userServiceController.getUserCourseCategories);
 
-userServiceRouter.route("/categories")
+apiGatewayRouter.route("/categories")
   .post(userServiceController.createCategorie);
 
-userServiceRouter.route("/categories/user")
+apiGatewayRouter.route("/categories/user")
   .post(userServiceController.addCategoryToUser);
 
-app.use("/api-gateway", userServiceRouter);
+apiGatewayRouter.route("/users/login")
+  .get(userServiceController.login);
+
+app.use("/api-gateway", apiGatewayRouter);
 
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, "public")));
