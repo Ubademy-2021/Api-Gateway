@@ -46,7 +46,7 @@ exports.checkFirebaseToken = (token, callback) => {
     admin.auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
-        console.log("Firebase decoded token mail: " + decodedToken.email);
+        logInfo("Firebase decoded token mail: " + decodedToken.email);
         callback(decodedToken.email, null);
     })
     .catch((error) => {
