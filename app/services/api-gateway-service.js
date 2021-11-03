@@ -1,5 +1,5 @@
 var admin = require("firebase-admin");
-var serviceAccount = require("./service-account.json");
+var serviceAccount = require("../utils/service-account.json");
 const axios = require("axios");
 const {logError, logInfo} = require("../utils/log");
 
