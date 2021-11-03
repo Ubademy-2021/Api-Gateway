@@ -127,3 +127,29 @@ exports.createUser = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.getAdmins = (req, response) => {
+  logInfo("Getting all admins");
+
+  axios.get(`${base_user_service_url}/api/admins`)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.createAdmin = (req, response) => {
+  logInfo("Creating admin");
+
+  axios.post(`${base_user_service_url}/api/admins`, req.body)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};

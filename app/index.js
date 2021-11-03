@@ -33,6 +33,9 @@ apiGatewayRouter.route("/users")
 apiGatewayRouter.route("/users/:id")
   .put(userServiceController.updateUserById);
 
+apiGatewayRouter.route("/users/login")
+    .get(userServiceController.login);
+
 apiGatewayRouter.route("/categories")
   .get(userServiceController.getCourseCategories);
 
@@ -45,8 +48,11 @@ apiGatewayRouter.route("/categories")
 apiGatewayRouter.route("/categories/user")
   .post(userServiceController.addCategoryToUser);
 
-apiGatewayRouter.route("/users/login")
-  .get(userServiceController.login);
+apiGatewayRouter.route("/admins")
+  .get(userServiceController.getAdmins);
+
+apiGatewayRouter.route("/admins")
+  .post(userServiceController.createAdmin);
 
 app.use("/api-gateway", apiGatewayRouter);
 
