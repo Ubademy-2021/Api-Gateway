@@ -7,6 +7,11 @@ const tracer = require("dd-trace").init({
   service: "api-gateway"
 });
 
+// Swagger imports
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./utils/swagger-output.json");
+
+
 const path = require("path");
 const express = require("express");
 
@@ -19,6 +24,9 @@ const { logInfo } = require("./utils/log");
 
 // App
 const app = express();
+
+// Middleware
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // API routes
 var apiGatewayRouter = express.Router();
