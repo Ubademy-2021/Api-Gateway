@@ -9,7 +9,7 @@ const tracer = require("dd-trace").init({
 
 // Swagger imports
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./utils/swagger_output.json");
+const swaggerFile = require("./swagger_output.json");
 
 const path = require("path");
 const express = require("express");
