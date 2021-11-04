@@ -1,1 +1,9 @@
 info: | Oct-19-2021 15:38:54 | Running on port 8080
+info: | Nov-03-2021 19:13:39 | Running on port 8080
+info: | Nov-03-2021 19:13:39 | Config var BASE_HEROKU_URL is https://ubademy-user-service.herokuapp.com
+info: | Nov-03-2021 19:13:48 | Getting all admins
+info: | Nov-03-2021 19:13:49 | Status: 200
+info: | Nov-03-2021 19:14:30 | Creating admin
+info: | Nov-03-2021 19:14:31 | Status: 200
+info: | Nov-03-2021 19:14:34 | Getting all admins
+info: | Nov-03-2021 19:14:34 | Status: 200
