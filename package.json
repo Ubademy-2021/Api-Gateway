@@ -4,9 +4,8 @@
   "description": "Api-Gateway for Ubademy",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --coverage",
-    "start-gendoc": "node ./app/utils/swagger.js"
+    "start": "node swagger.js",
+    "test": "jest --coverage"
   },
   "keywords": [
     "nodejs"
