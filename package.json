@@ -4,9 +4,8 @@
   "description": "Api-Gateway for Ubademy",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --coverage",
-    "swagger-autogen": "node ./utils/swagger.js"
+    "start": "node swagger.js",
+    "test": "jest --coverage"
   },
   "keywords": [
     "nodejs"
@@ -37,6 +36,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "swagger-autogen": "^2.12.5"
   }
 }

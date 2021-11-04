@@ -29,7 +29,6 @@ COPY heroku/heroku-entrypoint.sh package*.json ./
 # Install all dependencies
 RUN npm install
 RUN npm install --save dd-trace
-RUN npm swagger-autogen
 RUN cd -
 
 # Expose DogStatsD and trace-agent ports
