@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "jest --coverage",
-    "swagger-autogen": "node ./utils/swagger.js"
+    "start-gendoc": "node ./app/utils/swagger.js"
   },
   "keywords": [
     "nodejs"

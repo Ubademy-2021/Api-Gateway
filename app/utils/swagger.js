@@ -10,11 +10,13 @@ const doc = {
   schemes: ["http", "https"],
 };
 
-const outputFile = "./utils/swagger-output.json";
-const endpointsFiles = ["./index.js"];
+const outputFile = "app/utils/swagger_output.json";
+const endpointsFiles = ["app/index.js"];
 
 /* NOTE: if you use the express Router, you must pass in the 
    'endpointsFiles' only the root file where the route starts,
    such as index.js, app.js, routes.js, ... */
    
-swaggerAutogen(outputFile, endpointsFiles, doc);
+swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
+    require("../index");
+});
