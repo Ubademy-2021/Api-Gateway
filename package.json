@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node swagger.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage --forceExit"
   },
   "keywords": [
     "nodejs"
   ],
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
+    "axios": "^0.24.0",
     "body-parser": "1.17.2",
     "datadog-winston": "^1.5.1",
     "dd-trace": "^1.5.0",
@@ -20,9 +24,10 @@
     "firebase-admin": "^10.0.0",
     "node-rules": "3.1.0",
     "serialize-javascript": "^1.4.0",
-    "winston": "^3.3.3",
-    "swagger-ui-express": "^4.1.4",
-    "axios": "^0.24.0"
+    "supertest": "^6.1.6",
+    "swagger-node-express": "^2.1.3",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.3.3"
   },
   "author": "ffabbiano",
   "license": "ISC",
