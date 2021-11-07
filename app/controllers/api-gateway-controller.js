@@ -4,6 +4,12 @@ const { base_user_service_url, base_course_service_url } = require("../config");
 const axios = require("axios");
 
 exports.getServices = async (req, response) => {
+    /* #swagger.parameters['status'] = {
+            in: 'query',
+            description: "Services status",
+            required: false,
+    } */
+
     logInfo("Getting all services");
     
     var services = [];
