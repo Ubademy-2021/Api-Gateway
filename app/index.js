@@ -16,6 +16,7 @@ const express = require("express");
 
 const userServiceController = require("./controllers/user-service-controller");
 const courseServiceController = require("./controllers/course-service-controller");
+const apiGatewayController = require("./controllers/api-gateway-controller");
 
 const bodyParser = require("body-parser");
 const { port, base_user_service_url } = require("./config");
@@ -100,6 +101,10 @@ apiGatewayRouter.route("/collaborators")
 
 apiGatewayRouter.route("/collaborators/:course_id")
   .get(courseServiceController.getCourseCollaborator);
+
+// Get services up
+apiGatewayRouter.route("/services")
+  .get(apiGatewayController.getServices);
 
 app.use("/api-gateway", apiGatewayRouter);
 
