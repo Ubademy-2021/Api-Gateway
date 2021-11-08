@@ -166,3 +166,29 @@ exports.getCourseCollaborator = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.createCategorie = (req, response) => {
+  logInfo("Creating categories");
+
+  axios.post(`${base_course_service_url}/api/categories`, req.body)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.getCategories = (req, response) => {
+  logInfo("Getting all categories");
+
+  axios.get(`${base_course_service_url}/api/categories`)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
