@@ -63,19 +63,6 @@ exports.updateUserById = (req, response) => {
       });
 };
 
-exports.getCourseCategories = (req, response) => {
-  logInfo("Getting course categories");
-
-  axios.get(`${base_user_service_url}/api/categories`)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
-};
-
 exports.getUserCourseCategories = (req, response) => {
   logInfo("Getting course categories for user with id: " + req.params.userId);
 
@@ -83,19 +70,6 @@ exports.getUserCourseCategories = (req, response) => {
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
-};
-
-exports.createCategorie = (req, response) => {
-  logInfo("Creating categories");
-
-  axios.post(`${base_user_service_url}/api/categories`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
       }).catch((err) => {
         logError(err.response.data.detail);
         response.status(400).send(err.response.data.detail);

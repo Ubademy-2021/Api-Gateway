@@ -47,14 +47,8 @@ apiGatewayRouter.route("/users/:id")
 apiGatewayRouter.route("/users/login")
     .get(userServiceController.login);
 
-apiGatewayRouter.route("/categories")
-  .get(userServiceController.getCourseCategories);
-
 apiGatewayRouter.route("/categories/:userId")
   .get(userServiceController.getUserCourseCategories);
-
-apiGatewayRouter.route("/categories")
-  .post(userServiceController.createCategorie);
 
 apiGatewayRouter.route("/categories/user")
   .post(userServiceController.addCategoryToUser);
@@ -101,6 +95,12 @@ apiGatewayRouter.route("/collaborators")
 
 apiGatewayRouter.route("/collaborators/:course_id")
   .get(courseServiceController.getCourseCollaborator);
+
+apiGatewayRouter.route("/categories")
+  .get(courseServiceController.getCategories);
+
+apiGatewayRouter.route("/categories")
+  .post(courseServiceController.createCategorie);
 
 // Get services up
 apiGatewayRouter.route("/services")
