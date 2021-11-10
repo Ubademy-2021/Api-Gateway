@@ -63,7 +63,10 @@ apiGatewayRouter.route("/users/favorites/:userId")
   .get(userServiceController.getFavoriteCourses);
 
 apiGatewayRouter.route("/users/favorites")
-  .post(userServiceController.createAdmin);
+  .post(userServiceController.addFavoriteCourse);
+
+apiGatewayRouter.route("/users/favorites")
+  .delete(userServiceController.deleteFavoriteCourse);
 
 // Course-Service
 apiGatewayRouter.route("/courses")

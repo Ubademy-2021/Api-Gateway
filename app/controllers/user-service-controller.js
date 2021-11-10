@@ -153,3 +153,16 @@ exports.addFavoriteCourse = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.deleteFavoriteCourse = (req, response) => {
+  logInfo("Deleting favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
+
+  axios.delete(`${base_user_service_url}/api/users/favorites`, { data: req.body })
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
