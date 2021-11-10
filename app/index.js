@@ -114,6 +114,9 @@ apiGatewayRouter.route("/categories")
 apiGatewayRouter.route("/courses/recommendation/:userId}")
   .get(courseServiceController.getCourseRecommendation);
 
+apiGatewayRouter.route("/courses/category/:categoryId")
+  .get(courseServiceController.getCoursesByCategory);
+
 // Get services up
 apiGatewayRouter.route("/services")
   .get(apiGatewayController.getServices);
