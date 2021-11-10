@@ -127,3 +127,55 @@ exports.createAdmin = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.getFavoriteCourses = (req, response) => {
+  logInfo("Getting favourite courses for user with id: " + req.params.userId);
+
+  axios.get(`${base_user_service_url}/api/users/favorites/` + req.params.userId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.addFavoriteCourse = (req, response) => {
+  logInfo("Adding favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
+
+  axios.post(`${base_user_service_url}/api/users/favorites`, req.body)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.deleteFavoriteCourse = (req, response) => {
+  logInfo("Deleting favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
+
+  axios.delete(`${base_user_service_url}/api/users/favorites`, { data: req.body })
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.blockUser = (req, response) => {
+  logInfo("Blocking user with id  " + req.params.userId);
+
+  axios.put(`${base_user_service_url}/api/users/block/` + req.params.userId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};

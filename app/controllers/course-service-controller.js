@@ -192,3 +192,29 @@ exports.getCategories = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.getCourseRecommendation = (req, response) => {
+  logInfo("Getting course recommendations for user with id: " + req.params.userId);
+
+  axios.get(`${base_course_service_url}/api/courses/recommendation/` + req.params.userId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.getCoursesByCategory = (req, response) => {
+  logInfo("Getting courses by category id: " + req.params.categoryId);
+
+  axios.get(`${base_course_service_url}/api/courses/category/` + req.params.categoryId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};

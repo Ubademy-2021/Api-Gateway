@@ -36,16 +36,19 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // User-Service
 apiGatewayRouter.route("/users")
-  .post(userServiceController.createUser);
+  .get(userServiceController.getUser);
 
 apiGatewayRouter.route("/users")
-  .get(userServiceController.getUser);
+  .post(userServiceController.createUser);
 
 apiGatewayRouter.route("/users/:id")
   .put(userServiceController.updateUserById);
 
+apiGatewayRouter.route("/users/block/:userId")
+  .put(userServiceController.blockUser);
+
 apiGatewayRouter.route("/users/login")
-    .get(userServiceController.login);
+  .get(userServiceController.login);
 
 apiGatewayRouter.route("/categories/:userId")
   .get(userServiceController.getUserCourseCategories);
@@ -58,6 +61,15 @@ apiGatewayRouter.route("/admins")
 
 apiGatewayRouter.route("/admins")
   .post(userServiceController.createAdmin);
+
+apiGatewayRouter.route("/users/favorites/:userId")
+  .get(userServiceController.getFavoriteCourses);
+
+apiGatewayRouter.route("/users/favorites")
+  .post(userServiceController.addFavoriteCourse);
+
+apiGatewayRouter.route("/users/favorites")
+  .delete(userServiceController.deleteFavoriteCourse);
 
 // Course-Service
 apiGatewayRouter.route("/courses")
@@ -101,6 +113,12 @@ apiGatewayRouter.route("/categories")
 
 apiGatewayRouter.route("/categories")
   .post(courseServiceController.createCategorie);
+
+apiGatewayRouter.route("/courses/recommendation/:userId}")
+  .get(courseServiceController.getCourseRecommendation);
+
+apiGatewayRouter.route("/courses/category/:categoryId")
+  .get(courseServiceController.getCoursesByCategory);
 
 // Get services up
 apiGatewayRouter.route("/services")
