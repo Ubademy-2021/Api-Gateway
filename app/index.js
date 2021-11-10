@@ -36,16 +36,19 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // User-Service
 apiGatewayRouter.route("/users")
-  .post(userServiceController.createUser);
+  .get(userServiceController.getUser);
 
 apiGatewayRouter.route("/users")
-  .get(userServiceController.getUser);
+  .post(userServiceController.createUser);
 
 apiGatewayRouter.route("/users/:id")
   .put(userServiceController.updateUserById);
 
+apiGatewayRouter.route("/users/block/:userId")
+  .put(userServiceController.blockUser);
+
 apiGatewayRouter.route("/users/login")
-    .get(userServiceController.login);
+  .get(userServiceController.login);
 
 apiGatewayRouter.route("/categories/:userId")
   .get(userServiceController.getUserCourseCategories);

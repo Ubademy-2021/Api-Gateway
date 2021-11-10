@@ -166,3 +166,16 @@ exports.deleteFavoriteCourse = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.blockUser = (req, response) => {
+  logInfo("Blocking user with id  " + req.params.userId);
+
+  axios.put(`${base_user_service_url}/api/users/block/` + req.params.userId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
