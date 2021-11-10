@@ -59,6 +59,12 @@ apiGatewayRouter.route("/admins")
 apiGatewayRouter.route("/admins")
   .post(userServiceController.createAdmin);
 
+apiGatewayRouter.route("/users/favorites/:userId")
+  .get(userServiceController.getFavoriteCourses);
+
+apiGatewayRouter.route("/users/favorites")
+  .post(userServiceController.createAdmin);
+
 // Course-Service
 apiGatewayRouter.route("/courses")
   .get(courseServiceController.getCourses);
@@ -101,6 +107,9 @@ apiGatewayRouter.route("/categories")
 
 apiGatewayRouter.route("/categories")
   .post(courseServiceController.createCategorie);
+
+apiGatewayRouter.route("/courses/recommendation/:userId}")
+  .get(courseServiceController.getCourseRecommendation);
 
 // Get services up
 apiGatewayRouter.route("/services")
