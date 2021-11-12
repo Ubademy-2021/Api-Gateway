@@ -41,7 +41,14 @@ exports.login = (req, response) => {
       axios.get(url)
           .then((res) => {
             logInfo(`Status: ${res.status}`);
-            response.json(res.data);
+
+            if (res.data[0]["isBlock"] == true) {
+              logInfo("User has been blocked by administrator");
+              response.status(409).send("El usuario ha sido bloqueado por un administrador.");
+            } else {
+              response.json(res.data); 
+            }
+
           }).catch((err) => {
             logError(err);
             response.status(400).send(err);
