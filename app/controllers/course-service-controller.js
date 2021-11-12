@@ -17,7 +17,7 @@ exports.getCourses = (req, response) => {
     url = `${base_course_service_url}/api/courses?suscription_id=` + req.query["suscription_id"];
   } else if (req.query["category_id"]) {
     url = `${base_course_service_url}/api/courses?category_id=` + req.query["category_id"];
-  } else if (req.query["active"] == "True") {
+  } else if (req.query["active"] == "true") {
     url = `${base_course_service_url}/api/courses?active=true`;
   }
 
