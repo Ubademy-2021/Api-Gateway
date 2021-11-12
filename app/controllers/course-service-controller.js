@@ -8,6 +8,7 @@ exports.getCourses = (req, response) => {
   logInfo("Query params - suscription_id: " + req.query["suscription_id"]);
   logInfo("Query params - category_id: " + req.query["category_id"]);
   logInfo("Query params - active: " + req.query["active"]);
+  logInfo("Query params - user_id: " + req.query["user_id"]);
 
   var url = `${base_course_service_url}/api/courses`;
 
@@ -19,6 +20,8 @@ exports.getCourses = (req, response) => {
     url = `${base_course_service_url}/api/courses?category_id=` + req.query["category_id"];
   } else if (req.query["active"] == "true") {
     url = `${base_course_service_url}/api/courses?active=true`;
+  } else if (req.query["user_id"]) {
+    url = `${base_course_service_url}/api/courses?user_id=` + req.query["user_id"];
   }
 
   axios.get(url)
