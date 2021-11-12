@@ -4,8 +4,22 @@ const { logError, logInfo } = require("../utils/log");
 
 exports.getCourses = (req, response) => {
   logInfo("Getting courses from course service");
+  logInfo("Query params - course_id: " + req.query["course_id"]);
+  logInfo("Query params - suscription_id: " + req.query["suscription_id"]);
+  logInfo("Query params - category_id: " + req.query["category_id"]);
+  logInfo("Query params - active: " + req.query["active"]);
 
   var url = `${base_course_service_url}/api/courses`;
+
+  if (req.query["course_id"]){
+    url = `${base_course_service_url}/api/courses?course_id=` + req.query["course_id"];
+  } else if (req.query["suscription_id"]) {
+    url = `${base_course_service_url}/api/courses?suscription_id=` + req.query["suscription_id"];
+  } else if (req.query["category_id"]) {
+    url = `${base_course_service_url}/api/courses?category_id=` + req.query["category_id"];
+  } else if (req.query["active"] == "true") {
+    url = `${base_course_service_url}/api/courses?active=true`;
+  }
 
   axios.get(url)
       .then((res) => {
@@ -30,38 +44,10 @@ exports.createCourse = (req, response) => {
       });
 };
 
-exports.getCourseById = (req, response) => {
-  logInfo("Getting course with id: " + req.params.course_id);
-
-  var url = `${base_course_service_url}/api/courses/` + req.params.course_id;
-
-  axios.get(url)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err);
-        response.status(400).send(err);
-      });
-};
-
 exports.updateCourseById = (req, response) => {
   logInfo("Updating course with id: " + req.params.course_id);
 
   axios.put(`${base_course_service_url}/api/courses/` + req.params.course_id, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
-};
-
-exports.getCoursesFromSuscription = (req, response) => {
-  logInfo("Getting courses from suscription with id: " + req.params.suscription_id);
-
-  axios.get(`${base_course_service_url}/api/courses/suscription/` + req.params.suscription_id)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);
@@ -197,19 +183,6 @@ exports.getCourseRecommendation = (req, response) => {
   logInfo("Getting course recommendations for user with id: " + req.params.userId);
 
   axios.get(`${base_course_service_url}/api/courses/recommendation/` + req.params.userId)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
-};
-
-exports.getCoursesByCategory = (req, response) => {
-  logInfo("Getting courses by category id: " + req.params.categoryId);
-
-  axios.get(`${base_course_service_url}/api/courses/category/` + req.params.categoryId)
       .then((res) => {
         logInfo(`Status: ${res.status}`);
         response.json(res.data);

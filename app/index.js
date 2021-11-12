@@ -79,13 +79,7 @@ apiGatewayRouter.route("/courses")
   .post(courseServiceController.createCourse);
 
 apiGatewayRouter.route("/courses/:course_id")
-  .get(courseServiceController.getCourseById);
-
-apiGatewayRouter.route("/courses/:course_id")
   .put(courseServiceController.updateCourseById);
-
-apiGatewayRouter.route("/courses/suscription/:suscription_id")
-  .get(courseServiceController.getCoursesFromSuscription);
 
 apiGatewayRouter.route("/courses/cancel/:course_id")
   .post(courseServiceController.cancelCourse);
@@ -116,9 +110,6 @@ apiGatewayRouter.route("/categories")
 
 apiGatewayRouter.route("/courses/recommendation/:userId}")
   .get(courseServiceController.getCourseRecommendation);
-
-apiGatewayRouter.route("/courses/category/:categoryId")
-  .get(courseServiceController.getCoursesByCategory);
 
 // Get services up
 apiGatewayRouter.route("/services")
