@@ -14,14 +14,19 @@ exports.getCourses = (req, response) => {
 
   if (req.query["course_id"]){
     url = `${base_course_service_url}/api/courses?course_id=` + req.query["course_id"];
+    logInfo("Url formed:" + url);
   } else if (req.query["suscription_id"]) {
     url = `${base_course_service_url}/api/courses?suscription_id=` + req.query["suscription_id"];
+    logInfo("Url formed:" + url);
   } else if (req.query["category_id"]) {
     url = `${base_course_service_url}/api/courses?category_id=` + req.query["category_id"];
+    logInfo("Url formed:" + url);
   } else if (req.query["active"] == "true") {
     url = `${base_course_service_url}/api/courses?active=true`;
+    logInfo("Url formed:" + url);
   } else if (req.query["user_id"]) {
     url = `${base_course_service_url}/api/courses?user_id=` + req.query["user_id"];
+    logInfo("Url formed:" + url);
   }
 
   axios.get(url)
