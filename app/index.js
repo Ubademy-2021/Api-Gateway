@@ -108,7 +108,7 @@ apiGatewayRouter.route("/categories")
 apiGatewayRouter.route("/categories")
   .post(courseServiceController.createCategorie);
 
-apiGatewayRouter.route("/courses/recommendation/:userId}")
+apiGatewayRouter.route("/courses/recommendation/:userId")
   .get(courseServiceController.getCourseRecommendation);
 
 // Get services up
