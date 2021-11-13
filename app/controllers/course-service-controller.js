@@ -199,3 +199,68 @@ exports.getCourseRecommendation = (req, response) => {
         response.status(400).send(err.response.data.detail);
       });
 };
+
+exports.createCourseInscription = (req, response) => {
+  logInfo("Creating course inscription");
+
+  axios.post(`${base_course_service_url}/api/courses/inscription`, req.body)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.getCourseStudents = (req, response) => {
+  logInfo("Getting course students for course id: " + req.params.courseId);
+
+  axios.get(`${base_course_service_url}/api/courses/students/` + req.params.courseId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.cancelCourseInscription = (req, response) => {
+  logInfo("Cancelling course " + req.body["courseId"] + " suscription for user id: " + req.body["userId"]);
+
+  axios.put(`${base_course_service_url}/api/courses/inscription/cancel`, req.body)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.createSuscriptionInscription = (req, response) => {
+  logInfo("Creating inscription to suscription id: " + req.body["suscriptionId"]);
+
+  axios.post(`${base_course_service_url}/api/suscriptions/inscription`, req.body)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.status(201).json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};
+
+exports.getUserSuscription = (req, response) => {
+  logInfo("Getting suscriptions for user id: " + req.params.userId);
+
+  axios.get(`${base_course_service_url}/api/suscriptions/inscription/` + req.params.userId)
+      .then((res) => {
+        logInfo(`Status: ${res.status}`);
+        response.json(res.data);
+      }).catch((err) => {
+        logError(err.response.data.detail);
+        response.status(400).send(err.response.data.detail);
+      });
+};

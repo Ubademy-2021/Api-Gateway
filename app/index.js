@@ -131,6 +131,21 @@ apiGatewayRouter.route("/categories")
 apiGatewayRouter.route("/courses/recommendation/:userId")
   .get(courseServiceController.getCourseRecommendation);
 
+apiGatewayRouter.route("/courses/inscription")
+  .post(courseServiceController.createCourseInscription);
+
+apiGatewayRouter.route("/courses/students/:courseId")
+  .get(courseServiceController.getCourseStudents);
+
+apiGatewayRouter.route("/courses/inscription/cancel")
+  .put(courseServiceController.cancelCourseInscription);
+
+apiGatewayRouter.route("/suscriptions/inscription")
+  .post(courseServiceController.createSuscriptionInscription);
+
+apiGatewayRouter.route("/suscriptions/inscription/:userId")
+  .get(courseServiceController.getUserSuscription);
+
 // Get services up
 apiGatewayRouter.route("/services")
   .get(apiGatewayController.getServices);
