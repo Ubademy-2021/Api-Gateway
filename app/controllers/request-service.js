@@ -30,3 +30,18 @@ exports.postRequest = (url, response, body) => {
         }
     });
 };
+
+exports.putRequest = (url, response, body) => {
+    axios.put(url, body)
+    .then((res) => {
+        logInfo(`PUT request to ${url} got status code: ${res.status}`);
+        response.status(200).json(res.data);
+    }).catch((error) => {
+        if (error.response) {
+            logError(`Error while making PUT request to ${url} got status code: ${error.response.status}`);
+            response.status(error.response.status).send(error.response.data);
+        } else {
+            response.status(400).send(`Error while making PUT request to ${url}`);
+        }
+    });
+};
