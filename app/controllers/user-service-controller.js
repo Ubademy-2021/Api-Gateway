@@ -2,7 +2,7 @@ const axios = require("axios");
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
-const { getRequest, postRequest, putRequest } = require("./request-service");
+const { getRequest, postRequest, putRequest, deleteRequest } = require("./request-service");
 
 exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
@@ -79,15 +79,7 @@ exports.addFavoriteCourse = (req, response) => {
 
 exports.deleteFavoriteCourse = (req, response) => {
   logInfo("Deleting favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
-
-  axios.delete(`${base_user_service_url}/api/users/favorites`, { data: req.body })
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  deleteRequest(`${base_user_service_url}/api/users/favorites`, response, req.body);
 };
 
 exports.blockUser = (req, response) => {

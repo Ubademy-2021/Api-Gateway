@@ -45,3 +45,18 @@ exports.putRequest = (url, response, body) => {
         }
     });
 };
+
+exports.deleteRequest = (url, response, body) => {
+    axios.delete(url, { data: body })
+    .then((res) => {
+        logInfo(`DELETE request to ${url} got status code: ${res.status}`);
+        response.status(200).json(res.data);
+    }).catch((error) => {
+        if (error.response) {
+            logError(`Error while making DELETE request to ${url} got status code: ${error.response.status}`);
+            response.status(error.response.status).send(error.response.data);
+        } else {
+            response.status(400).send(`Error while making DELETE request to ${url}`);
+        }
+    });
+};
