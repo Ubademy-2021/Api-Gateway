@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
