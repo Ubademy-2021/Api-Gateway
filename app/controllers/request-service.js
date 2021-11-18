@@ -15,3 +15,18 @@ exports.getRequest = (url, response) => {
         }
       });
 };
+
+exports.postRequest = (url, response, body) => {
+    axios.post(url, body)
+    .then((res) => {
+        logInfo(`POST request to ${url} got status code: ${res.status}`);
+        response.status(201).json(res.data);
+    }).catch((error) => {
+        if (error.response) {
+            logError(`Error while making POST request to ${url} got status code: ${error.response.status}`);
+            response.status(error.response.status).send(error.response.data);
+        } else {
+            response.status(400).send(`Error while making POST request to ${url}`);
+        }
+    });
+};

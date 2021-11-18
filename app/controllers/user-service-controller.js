@@ -2,7 +2,7 @@ const axios = require("axios");
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
-const { getRequest } = require("./request-service");
+const { getRequest, postRequest } = require("./request-service");
 
 exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
@@ -57,28 +57,12 @@ exports.getUserCourseCategories = (req, response) => {
 
 exports.addCategoryToUser = (req, response) => {
   logInfo("Adding category to user");
-
-  axios.post(`${base_user_service_url}/api/categories/user`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/categories/user`, response, req.body);
 };
 
 exports.createUser = (req, response) => {
   logInfo("Creating user");
-
-  axios.post(`${base_user_service_url}/api/users`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/users`, response, req.body);
 };
 
 exports.getAdmins = (req, response) => {
@@ -88,15 +72,7 @@ exports.getAdmins = (req, response) => {
 
 exports.createAdmin = (req, response) => {
   logInfo("Creating admin");
-
-  axios.post(`${base_user_service_url}/api/admins`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/admins`, response, req.body);
 };
 
 exports.getFavoriteCourses = (req, response) => {
@@ -106,15 +82,7 @@ exports.getFavoriteCourses = (req, response) => {
 
 exports.addFavoriteCourse = (req, response) => {
   logInfo("Adding favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
-
-  axios.post(`${base_user_service_url}/api/users/favorites`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/users/favorites`, response, req.body);
 };
 
 exports.deleteFavoriteCourse = (req, response) => {
