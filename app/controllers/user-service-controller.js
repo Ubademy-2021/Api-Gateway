@@ -2,6 +2,7 @@ const axios = require("axios");
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
+const { getRequest } = require("./request-service");
 
 exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
@@ -15,14 +16,7 @@ exports.getUser = (req, response) => {
   } else if (req.query["email"])
     url = `${base_user_service_url}/api/users?email=` + req.query["email"];
 
-  axios.get(url)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err);
-        response.status(400).send(err);
-      });
+  getRequest(url, response);
 };
 
 exports.login = (req, response) => {
@@ -38,14 +32,7 @@ exports.login = (req, response) => {
 
       var url = `${base_user_service_url}/api/users?email=` + userEmail;
 
-      axios.get(url)
-          .then((res) => {
-            logInfo(`Status: ${res.status}`);
-            response.json(res.data);
-          }).catch((err) => {
-            logError(err);
-            response.status(400).send(err);
-          });
+      getRequest(url, response);
     }   
   });
 };
@@ -65,15 +52,7 @@ exports.updateUserById = (req, response) => {
 
 exports.getUserCourseCategories = (req, response) => {
   logInfo("Getting course categories for user with id: " + req.params.userId);
-
-  axios.get(`${base_user_service_url}/api/categories/` + req.params.userId)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  getRequest(`${base_user_service_url}/api/categories/` + req.params.userId, response);
 };
 
 exports.addCategoryToUser = (req, response) => {
@@ -104,15 +83,7 @@ exports.createUser = (req, response) => {
 
 exports.getAdmins = (req, response) => {
   logInfo("Getting all admins");
-
-  axios.get(`${base_user_service_url}/api/admins`)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  getRequest(`${base_user_service_url}/api/admins`, response);
 };
 
 exports.createAdmin = (req, response) => {
@@ -130,15 +101,7 @@ exports.createAdmin = (req, response) => {
 
 exports.getFavoriteCourses = (req, response) => {
   logInfo("Getting favourite courses for user with id: " + req.params.userId);
-
-  axios.get(`${base_user_service_url}/api/users/favorites/` + req.params.userId)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  getRequest(`${base_user_service_url}/api/users/favorites/` + req.params.userId, response);
 };
 
 exports.addFavoriteCourse = (req, response) => {
