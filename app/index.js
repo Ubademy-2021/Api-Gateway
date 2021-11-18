@@ -102,7 +102,7 @@ apiGatewayRouter.route("/courses/:course_id")
   .put(courseServiceController.updateCourseById);
 
 apiGatewayRouter.route("/courses/cancel/:course_id")
-  .post(courseServiceController.cancelCourse);
+  .put(courseServiceController.cancelCourse);
 
 apiGatewayRouter.route("/suscriptions")
   .get(courseServiceController.getSuscriptions);
