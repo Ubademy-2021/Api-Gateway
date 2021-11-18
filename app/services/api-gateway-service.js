@@ -14,7 +14,7 @@ exports.manageAuthToken = (headers, callback) => {
         
         this.checkFirebaseToken(headers["firebase_authentication"], function(userEmail, err){
             if (err){
-                logError("Error while checking Firebase token");
+                logError("Error while checking Firebase token. " + err);
                 callback(null, err);
             }
 
@@ -30,7 +30,7 @@ exports.manageAuthToken = (headers, callback) => {
         
         this.checkFacebookToken(headers["facebook_authentication"], function(userEmail, err){
             if (err){
-                logError("Error while checking Facebook token");
+                logError("Error while checking Facebook token." + err);
                 callback(null, err);
             }
 
