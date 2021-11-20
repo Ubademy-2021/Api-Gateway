@@ -40,6 +40,10 @@ exports.manageAuthToken = (headers, callback) => {
 
         return;
     }
+
+    logInfo("No headers found");
+    // No headers were found --> error
+    callback(null, "No headers were found");
 };
 
 exports.checkFirebaseToken = (token, callback) => { 
