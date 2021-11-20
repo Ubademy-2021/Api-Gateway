@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
@@ -15,7 +17,7 @@ exports.getUser = (req, response) => {
   } else if (req.query["email"])
     url = `${base_user_service_url}/api/users?email=` + req.query["email"];
 
-  getRequest(url, response);
+  getRequest(url, response, req.headers);
 };
 
 exports.login = (req, response) => {
@@ -31,57 +33,57 @@ exports.login = (req, response) => {
 
       var url = `${base_user_service_url}/api/users?email=` + userEmail;
 
-      getRequest(url, response);
+      getRequest(url, response, req.headers);
     }   
   });
 };
 
 exports.updateUserById = (req, response) => {
   logInfo("Updating user with id: " + req.params.id);
-  putRequest(`${base_user_service_url}/api/users/` + req.params.id, response, req.body);
+  putRequest(`${base_user_service_url}/api/users/` + req.params.id, response, req.body, req.headers);
 };
 
 exports.getUserCourseCategories = (req, response) => {
   logInfo("Getting course categories for user with id: " + req.params.userId);
-  getRequest(`${base_user_service_url}/api/categories/` + req.params.userId, response);
+  getRequest(`${base_user_service_url}/api/categories/` + req.params.userId, response, req.headers);
 };
 
 exports.addCategoryToUser = (req, response) => {
   logInfo("Adding category to user");
-  postRequest(`${base_user_service_url}/api/categories/user`, response, req.body);
+  postRequest(`${base_user_service_url}/api/categories/user`, response, req.body, req.headers);
 };
 
 exports.createUser = (req, response) => {
   logInfo("Creating user");
-  postRequest(`${base_user_service_url}/api/users`, response, req.body);
+  postRequest(`${base_user_service_url}/api/users`, response, req.body, req.headers);
 };
 
 exports.getAdmins = (req, response) => {
   logInfo("Getting all admins");
-  getRequest(`${base_user_service_url}/api/admins`, response);
+  getRequest(`${base_user_service_url}/api/admins`, response, req.headers);
 };
 
 exports.createAdmin = (req, response) => {
   logInfo("Creating admin");
-  postRequest(`${base_user_service_url}/api/admins`, response, req.body);
+  postRequest(`${base_user_service_url}/api/admins`, response, req.body, req.headers);
 };
 
 exports.getFavoriteCourses = (req, response) => {
   logInfo("Getting favourite courses for user with id: " + req.params.userId);
-  getRequest(`${base_user_service_url}/api/users/favorites/` + req.params.userId, response);
+  getRequest(`${base_user_service_url}/api/users/favorites/` + req.params.userId, response, req.headers);
 };
 
 exports.addFavoriteCourse = (req, response) => {
   logInfo("Adding favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
-  postRequest(`${base_user_service_url}/api/users/favorites`, response, req.body);
+  postRequest(`${base_user_service_url}/api/users/favorites`, response, req.body, req.headers);
 };
 
 exports.deleteFavoriteCourse = (req, response) => {
   logInfo("Deleting favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
-  deleteRequest(`${base_user_service_url}/api/users/favorites`, response, req.body);
+  deleteRequest(`${base_user_service_url}/api/users/favorites`, response, req.body, req.headers);
 };
 
 exports.blockUser = (req, response) => {
   logInfo("Blocking user with id  " + req.params.userId);
-  putRequest(`${base_user_service_url}/api/users/block/` + req.params.userId, response, null);
+  putRequest(`${base_user_service_url}/api/users/block/` + req.params.userId, response, null, req.headers);
 };
