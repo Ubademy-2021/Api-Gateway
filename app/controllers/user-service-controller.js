@@ -1,7 +1,9 @@
-const axios = require("axios");
+/* eslint-disable no-unused-vars */
+
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
+const { getRequest, postRequest, putRequest, deleteRequest } = require("./request-service");
 
 exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
@@ -15,14 +17,7 @@ exports.getUser = (req, response) => {
   } else if (req.query["email"])
     url = `${base_user_service_url}/api/users?email=` + req.query["email"];
 
-  axios.get(url)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err);
-        response.status(400).send(err);
-      });
+  getRequest(url, response, req.headers);
 };
 
 exports.login = (req, response) => {
@@ -38,144 +33,57 @@ exports.login = (req, response) => {
 
       var url = `${base_user_service_url}/api/users?email=` + userEmail;
 
-      axios.get(url)
-          .then((res) => {
-            logInfo(`Status: ${res.status}`);
-            response.json(res.data);
-          }).catch((err) => {
-            logError(err);
-            response.status(400).send(err);
-          });
+      getRequest(url, response, req.headers);
     }   
   });
 };
 
 exports.updateUserById = (req, response) => {
   logInfo("Updating user with id: " + req.params.id);
-
-  axios.put(`${base_user_service_url}/api/users/` + req.params.id, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  putRequest(`${base_user_service_url}/api/users/` + req.params.id, response, req.body, req.headers);
 };
 
 exports.getUserCourseCategories = (req, response) => {
   logInfo("Getting course categories for user with id: " + req.params.userId);
-
-  axios.get(`${base_user_service_url}/api/categories/` + req.params.userId)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  getRequest(`${base_user_service_url}/api/categories/` + req.params.userId, response, req.headers);
 };
 
 exports.addCategoryToUser = (req, response) => {
   logInfo("Adding category to user");
-
-  axios.post(`${base_user_service_url}/api/categories/user`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/categories/user`, response, req.body, req.headers);
 };
 
 exports.createUser = (req, response) => {
   logInfo("Creating user");
-
-  axios.post(`${base_user_service_url}/api/users`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/users`, response, req.body, req.headers);
 };
 
 exports.getAdmins = (req, response) => {
   logInfo("Getting all admins");
-
-  axios.get(`${base_user_service_url}/api/admins`)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  getRequest(`${base_user_service_url}/api/admins`, response, req.headers);
 };
 
 exports.createAdmin = (req, response) => {
   logInfo("Creating admin");
-
-  axios.post(`${base_user_service_url}/api/admins`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/admins`, response, req.body, req.headers);
 };
 
 exports.getFavoriteCourses = (req, response) => {
   logInfo("Getting favourite courses for user with id: " + req.params.userId);
-
-  axios.get(`${base_user_service_url}/api/users/favorites/` + req.params.userId)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  getRequest(`${base_user_service_url}/api/users/favorites/` + req.params.userId, response, req.headers);
 };
 
 exports.addFavoriteCourse = (req, response) => {
   logInfo("Adding favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
-
-  axios.post(`${base_user_service_url}/api/users/favorites`, req.body)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  postRequest(`${base_user_service_url}/api/users/favorites`, response, req.body, req.headers);
 };
 
 exports.deleteFavoriteCourse = (req, response) => {
   logInfo("Deleting favorite course " + req.body["courseId"] + " for user with id: " + req.body["userId"]);
-
-  axios.delete(`${base_user_service_url}/api/users/favorites`, { data: req.body })
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  deleteRequest(`${base_user_service_url}/api/users/favorites`, response, req.body, req.headers);
 };
 
 exports.blockUser = (req, response) => {
   logInfo("Blocking user with id  " + req.params.userId);
-
-  axios.put(`${base_user_service_url}/api/users/block/` + req.params.userId)
-      .then((res) => {
-        logInfo(`Status: ${res.status}`);
-        response.status(201).json(res.data);
-      }).catch((err) => {
-        logError(err.response.data.detail);
-        response.status(400).send(err.response.data.detail);
-      });
+  putRequest(`${base_user_service_url}/api/users/block/` + req.params.userId, response, null, req.headers);
 };
