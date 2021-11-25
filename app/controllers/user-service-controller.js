@@ -3,7 +3,7 @@
 const { base_user_service_url } = require("../config");
 const { logError, logInfo } = require("../utils/log");
 const { manageAuthToken } = require("../services/api-gateway-service");
-const { getRequest, postRequest, putRequest, deleteRequest } = require("./request-service");
+const { getRequest, postRequest, putRequest, deleteRequest, getRequestNoAuth, postRequestNoAuth, putRequestNoAuth } = require("./request-service");
 
 exports.getUser = (req, response) => {
   logInfo("Getting users from user service");
@@ -40,22 +40,22 @@ exports.login = (req, response) => {
 
 exports.updateUserById = (req, response) => {
   logInfo("Updating user with id: " + req.params.id);
-  putRequest(`${base_user_service_url}/api/users/` + req.params.id, response, req.body, req.headers);
+  putRequestNoAuth(`${base_user_service_url}/api/users/` + req.params.id, response, req.body);
 };
 
 exports.getUserCourseCategories = (req, response) => {
   logInfo("Getting course categories for user with id: " + req.params.userId);
-  getRequest(`${base_user_service_url}/api/categories/` + req.params.userId, response, req.headers);
+  getRequestNoAuth(`${base_user_service_url}/api/categories/` + req.params.userId, response);
 };
 
 exports.addCategoryToUser = (req, response) => {
   logInfo("Adding category to user");
-  postRequest(`${base_user_service_url}/api/categories/user`, response, req.body, req.headers);
+  postRequestNoAuth(`${base_user_service_url}/api/categories/user`, response, req.body);
 };
 
 exports.createUser = (req, response) => {
   logInfo("Creating user");
-  postRequest(`${base_user_service_url}/api/users`, response, req.body, req.headers);
+  postRequestNoAuth(`${base_user_service_url}/api/users`, response, req.body);
 };
 
 exports.getAdmins = (req, response) => {
