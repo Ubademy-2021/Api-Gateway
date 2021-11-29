@@ -59,13 +59,23 @@ exports.createUser = (req, response) => {
 };
 
 exports.getAdmins = (req, response) => {
-  logInfo("Getting all admins");
-  getRequest(`${base_user_service_url}/api/admins`, response, req.headers);
+  logInfo("Getting admin");
+  logInfo("Query params - admin_id: " + req.query["admin_id"]);
+  logInfo("Query params - email: " + req.query["email"]);
+
+  var url = `${base_user_service_url}/api/admins`;
+
+  if (req.query["admin_id"]){
+    url = `${base_user_service_url}/api/admins?admin_id=` + req.query["admin_id"];
+  } else if (req.query["email"])
+    url = `${base_user_service_url}/api/admins?email=` + req.query["email"];
+
+  getRequestNoAuth(url, response, req.headers);
 };
 
 exports.createAdmin = (req, response) => {
   logInfo("Creating admin");
-  postRequest(`${base_user_service_url}/api/admins`, response, req.body, req.headers);
+  postRequestNoAuth(`${base_user_service_url}/api/admins`, response, req.body, req.headers);
 };
 
 exports.getFavoriteCourses = (req, response) => {
