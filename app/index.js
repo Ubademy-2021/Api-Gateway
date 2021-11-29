@@ -146,6 +146,9 @@ apiGatewayRouter.route("/suscriptions/inscription")
 apiGatewayRouter.route("/suscriptions/inscription/:userId")
   .get(courseServiceController.getUserSuscription);
 
+apiGatewayRouter.route("/courses/category")
+  .post(courseServiceController.addCategoryToCourse);
+
 // Get services up
 apiGatewayRouter.route("/services")
   .get(apiGatewayController.getServices);

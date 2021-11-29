@@ -116,3 +116,8 @@ exports.getUserSuscription = (req, response) => {
   logInfo("Getting suscriptions for user id: " + req.params.userId);
   getRequest(`${base_course_service_url}/api/suscriptions/inscription/` + req.params.userId, response, req.headers);
 };
+
+exports.addCategoryToCourse = (req, response) => {
+  logInfo("Adding category " + req.body["categoryId"] + " to course " + req.body["courseId"]);
+  postRequest(`${base_course_service_url}/api/courses/category`, response, req.body, req.headers);
+};
