@@ -1,5 +1,5 @@
 const { logError, logInfo } = require("../utils/log");
-const { services_ubademy } = require("../config");
+const { services_ubademy, base_payments_service_url, base_exams_service_url } = require("../config");
 const { base_user_service_url, base_course_service_url } = require("../config");
 const axios = require("axios");
 
@@ -38,6 +38,28 @@ exports.getServices = async (req, response) => {
                 }).catch((err) => {
                     logError("Course service is not up");
                     logError("Error when trying to reach Course Service: " + err);
+                });
+            
+            await axios.get(`${base_payments_service_url}/ping`)
+                .then((res) => {
+                    if (res["data"] == "pong")
+                        logInfo("Payments Service is up!");
+                        
+                        services.push("Payments-Service");
+                }).catch((err) => {
+                    logError("Payments service is not up");
+                    logError("Error when trying to reach Payments Service: " + err);
+                });
+
+            await axios.get(`${base_exams_service_url}/ping`)
+                .then((res) => {
+                    if (res["data"] == "pong")
+                        logInfo("Exams Service is up!");
+                        
+                        services.push("Exams-Service");
+                }).catch((err) => {
+                    logError("Exams service is not up");
+                    logError("Error when trying to reach Exams Service: " + err);
                 });
         }
         

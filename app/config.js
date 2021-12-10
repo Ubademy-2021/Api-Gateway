@@ -9,5 +9,7 @@ module.exports = {
     },
     base_user_service_url: process.env.BASE_USER_SERVICE_URL || "https://ubademy-user-service.herokuapp.com",
     base_course_service_url: process.env.BASE_COURSE_SERVICE_URL || "https://course-service-ubademy.herokuapp.com",
-    services_ubademy: ["Course-Service", "User-Service"]
+    base_payments_service_url: process.env.BASE_PAYMENTS_SERVICE_URL || "https://course-service-ubademy.herokuapp.com",
+    base_exams_service_url: process.env.BASE_PAYMENTS_SERVICE_URL || "https://exam-service-ubademy.herokuapp.com",
+    services_ubademy: ["Course-Service", "User-Service", "Payments-Service", "Exams-Service"]
   };
