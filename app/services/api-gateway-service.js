@@ -1,5 +1,4 @@
 var admin = require("firebase-admin");
-var fb_admin_for_admins = require("firebase-admin");
 
 var serviceAccount = require("../utils/service-account.json");
 var adminServiceAccount = require("../utils/admin-service-account.json");
@@ -7,14 +6,19 @@ var adminServiceAccount = require("../utils/admin-service-account.json");
 const axios = require("axios");
 const {logError, logInfo} = require("../utils/log");
 
+const adminFirebaseApp = admin.initializeApp(
+    {
+        credential: admin.credential.cert(adminServiceAccount)
+    },
+    "adminFirebaseApp" // this name will be used to retrieve firebase instance. E.g. first.database();
+);
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-
-fb_admin_for_admins.initializeApp({
-    credential: admin.credential.cert(adminServiceAccount)
-});
+const usersFirebaseApp = admin.initializeApp(
+    {
+        credential: admin.credential.cert(serviceAccount)
+    },
+    "usersFirebaseApp" // this name will be used to retrieve firebase instance. E.g. first.database();
+);
 
 exports.manageAuthToken = (headers, callback) => {
     if (headers["firebase_authentication"]){
@@ -71,7 +75,7 @@ exports.manageAuthToken = (headers, callback) => {
 };
 
 exports.checkAdminFirebaseToken = (token, callback) => { 
-    fb_admin_for_admins.auth()
+    adminFirebaseApp.auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
         logInfo("Firebase decoded token admin mail: " + decodedToken.email);
@@ -83,7 +87,7 @@ exports.checkAdminFirebaseToken = (token, callback) => {
 };
 
 exports.checkFirebaseToken = (token, callback) => { 
-    admin.auth()
+    usersFirebaseApp.auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
         logInfo("Firebase decoded token mail: " + decodedToken.email);

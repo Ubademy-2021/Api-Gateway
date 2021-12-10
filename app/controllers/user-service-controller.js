@@ -84,7 +84,7 @@ exports.loginAdmin = (req, response) => {
 
       logInfo("Obtained admin email: " + adminEmail + " after token decoding");
 
-      var url = `${base_user_service_url}/api/admin?email=` + adminEmail;
+      var url = `${base_user_service_url}/api/admins?email=` + adminEmail;
 
       getRequest(url, response, req.headers);
     }
