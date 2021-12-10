@@ -79,7 +79,7 @@ apiGatewayRouter.route("/categories/user")
 apiGatewayRouter.route("/admins")
   .get(userServiceController.getAdmins);
 
-apiGatewayRouter.route("/login-admins")
+apiGatewayRouter.route("/admins/login")
   .get(userServiceController.loginAdmin);
 
 apiGatewayRouter.route("/admins")
