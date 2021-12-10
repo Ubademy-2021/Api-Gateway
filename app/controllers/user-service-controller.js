@@ -73,6 +73,24 @@ exports.getAdmins = (req, response) => {
   getRequestNoAuth(url, response, req.headers);
 };
 
+exports.loginAdmin = (req, response) => {
+  logInfo("Starting login for admin");
+
+  manageAuthToken(req.headers, function(adminEmail, err){
+    if (err != null){
+      logError("Error while handling auth token");
+      response.status(404).send("Could not validate user");      
+    } else if (adminEmail != null) {
+
+      logInfo("Obtained admin email: " + adminEmail + " after token decoding");
+
+      var url = `${base_user_service_url}/api/admin?email=` + adminEmail;
+
+      getRequest(url, response, req.headers);
+    }
+  });
+};
+
 exports.createAdmin = (req, response) => {
   logInfo("Creating admin");
   postRequestNoAuth(`${base_user_service_url}/api/admins`, response, req.body, req.headers);
