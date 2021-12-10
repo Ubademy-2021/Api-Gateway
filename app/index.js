@@ -1,4 +1,6 @@
 "use strict";
+var cors = require("cors");
+
 
 // Datadog config: this line must come before importing any instrumented module.
 // eslint-disable-next-line no-unused-vars
@@ -24,6 +26,7 @@ const { logInfo } = require("./utils/log");
 
 // App
 const app = express();
+app.use(cors());
 
 // Middleware
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
