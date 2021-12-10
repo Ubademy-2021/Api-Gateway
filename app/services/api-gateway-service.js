@@ -1,5 +1,4 @@
 var admin = require("firebase-admin");
-var fb_admin_for_admins = require("firebase-admin");
 
 var serviceAccount = require("../utils/service-account.json");
 var adminServiceAccount = require("../utils/admin-service-account.json");
@@ -9,11 +8,7 @@ const {logError, logInfo} = require("../utils/log");
 
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-
-fb_admin_for_admins.initializeApp({
-    credential: admin.credential.cert(adminServiceAccount)
+    credential: admin.credential.cert(serviceAccount, adminServiceAccount)
 });
 
 exports.manageAuthToken = (headers, callback) => {
@@ -71,7 +66,7 @@ exports.manageAuthToken = (headers, callback) => {
 };
 
 exports.checkAdminFirebaseToken = (token, callback) => { 
-    fb_admin_for_admins.auth()
+    admin.auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
         logInfo("Firebase decoded token admin mail: " + decodedToken.email);
