@@ -1,6 +1,6 @@
 const { base_course_service_url } = require("../config");
 const { logInfo } = require("../utils/log");
-const { getRequest, postRequest, putRequest } = require("./request-service");
+const { getRequest, postRequest, putRequest, getRequestNoAuth } = require("./request-service");
 
 exports.getCourses = (req, response) => {
   logInfo("Getting courses from course service");
@@ -9,6 +9,7 @@ exports.getCourses = (req, response) => {
   logInfo("Query params - category_id: " + req.query["category_id"]);
   logInfo("Query params - active: " + req.query["active"]);
   logInfo("Query params - user_id: " + req.query["user_id"]);
+  logInfo("Query params - collaborator_id: " + req.query["collaborator_id"]);
 
   var url = `${base_course_service_url}/api/courses`;
 
@@ -26,6 +27,9 @@ exports.getCourses = (req, response) => {
     logInfo("Url formed:" + url);
   } else if (req.query["user_id"]) {
     url = `${base_course_service_url}/api/courses?user_id=` + req.query["user_id"];
+    logInfo("Url formed:" + url);
+  } else if (req.query["collaborator_id"]) {
+    url = `${base_course_service_url}/api/courses?collaborator_id=` + req.query["collaborator_id"];
     logInfo("Url formed:" + url);
   }
 
@@ -84,7 +88,7 @@ exports.createCategorie = (req, response) => {
 
 exports.getCategories = (req, response) => {
   logInfo("Getting all categories");
-  getRequest(`${base_course_service_url}/api/categories`, response, req.headers);
+  getRequestNoAuth(`${base_course_service_url}/api/categories`, response, req.headers);
 };
 
 exports.getCourseRecommendation = (req, response) => {
