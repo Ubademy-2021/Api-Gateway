@@ -9,6 +9,7 @@ exports.getCourses = (req, response) => {
   logInfo("Query params - category_id: " + req.query["category_id"]);
   logInfo("Query params - active: " + req.query["active"]);
   logInfo("Query params - user_id: " + req.query["user_id"]);
+  logInfo("Query params - collaborator_id: " + req.query["collaborator_id"]);
 
   var url = `${base_course_service_url}/api/courses`;
 
@@ -26,6 +27,9 @@ exports.getCourses = (req, response) => {
     logInfo("Url formed:" + url);
   } else if (req.query["user_id"]) {
     url = `${base_course_service_url}/api/courses?user_id=` + req.query["user_id"];
+    logInfo("Url formed:" + url);
+  } else if (req.query["collaborator_id"]) {
+    url = `${base_course_service_url}/api/courses?collaborator_id=` + req.query["collaborator_id"];
     logInfo("Url formed:" + url);
   }
 
