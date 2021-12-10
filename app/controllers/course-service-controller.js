@@ -1,6 +1,6 @@
 const { base_course_service_url } = require("../config");
 const { logInfo } = require("../utils/log");
-const { getRequest, postRequest, putRequest } = require("./request-service");
+const { getRequest, postRequest, putRequest, getRequestNoAuth } = require("./request-service");
 
 exports.getCourses = (req, response) => {
   logInfo("Getting courses from course service");
@@ -84,7 +84,7 @@ exports.createCategorie = (req, response) => {
 
 exports.getCategories = (req, response) => {
   logInfo("Getting all categories");
-  getRequest(`${base_course_service_url}/api/categories`, response, req.headers);
+  getRequestNoAuth(`${base_course_service_url}/api/categories`, response, req.headers);
 };
 
 exports.getCourseRecommendation = (req, response) => {
