@@ -79,6 +79,9 @@ apiGatewayRouter.route("/categories/user")
 apiGatewayRouter.route("/admins")
   .get(userServiceController.getAdmins);
 
+apiGatewayRouter.route("/admins/login")
+  .get(userServiceController.loginAdmin);
+
 apiGatewayRouter.route("/admins")
   .post(userServiceController.createAdmin);
 
