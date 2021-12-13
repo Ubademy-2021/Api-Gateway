@@ -70,6 +70,9 @@ apiGatewayRouter.route("/users/:id")
 apiGatewayRouter.route("/users/block/:userId")
   .put(userServiceController.blockUser);
 
+apiGatewayRouter.route("/users/unblock/:userId")
+  .put(userServiceController.unblockUser);
+
 apiGatewayRouter.route("/users/login")
   .get(userServiceController.login);
 

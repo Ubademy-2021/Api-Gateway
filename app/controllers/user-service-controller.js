@@ -115,3 +115,8 @@ exports.blockUser = (req, response) => {
   logInfo("Blocking user with id  " + req.params.userId);
   putRequest(`${base_user_service_url}/api/users/block/` + req.params.userId, response, null, req.headers);
 };
+
+exports.unblockUser = (req, response) => {
+  logInfo("Unblocking user with id  " + req.params.userId);
+  putRequest(`${base_user_service_url}/api/users/unblock/` + req.params.userId, response, null, req.headers);
+};
