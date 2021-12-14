@@ -19,6 +19,7 @@ const express = require("express");
 const userServiceController = require("./controllers/user-service-controller");
 const courseServiceController = require("./controllers/course-service-controller");
 const apiGatewayController = require("./controllers/api-gateway-controller");
+const examServiceController = require("./controllers/exams-service-controller");
 
 const bodyParser = require("body-parser");
 const { port, base_user_service_url } = require("./config");
@@ -57,7 +58,10 @@ app.use(function (req, res, next) {
   next();
 });
 
-// User-Service
+
+// ***************** USER SERVICE *****************
+
+
 apiGatewayRouter.route("/users")
   .get(userServiceController.getUser);
 
@@ -69,6 +73,9 @@ apiGatewayRouter.route("/users/:id")
 
 apiGatewayRouter.route("/users/block/:userId")
   .put(userServiceController.blockUser);
+
+apiGatewayRouter.route("/users/unblock/:userId")
+  .put(userServiceController.unblockUser);
 
 apiGatewayRouter.route("/users/login")
   .get(userServiceController.login);
@@ -97,7 +104,10 @@ apiGatewayRouter.route("/users/favorites")
 apiGatewayRouter.route("/users/favorites")
   .delete(userServiceController.deleteFavoriteCourse);
 
-// Course-Service
+
+// ***************** COURSE SERVICE *****************
+
+
 apiGatewayRouter.route("/courses")
   .get(courseServiceController.getCourses);
 
@@ -154,6 +164,29 @@ apiGatewayRouter.route("/suscriptions/inscription/:userId")
 
 apiGatewayRouter.route("/courses/category")
   .post(courseServiceController.addCategoryToCourse);
+
+
+// ***************** EXAM SERVICE *****************
+
+
+apiGatewayRouter.route("/exams")
+  .get(examServiceController.getExam);
+
+apiGatewayRouter.route("/exams")
+  .post(examServiceController.createExam);
+
+apiGatewayRouter.route("/exams/questions")
+  .post(examServiceController.createQuestion);
+
+apiGatewayRouter.route("/solutions")
+  .get(examServiceController.getSolution);
+
+apiGatewayRouter.route("/solutions")
+  .post(examServiceController.createSolution);
+
+apiGatewayRouter.route("/solutions/corrections")
+  .post(examServiceController.correctExam);
+
 
 // Get services up
 apiGatewayRouter.route("/services")
