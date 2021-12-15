@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
     paths-ignore:
       - 'config.js'
   pull_request:
