@@ -4,7 +4,7 @@ on:
   push:
     paths-ignore:
       - 'config.js'
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     paths-ignore:
       - 'config.js'
