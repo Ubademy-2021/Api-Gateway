@@ -1,0 +1,464 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Api-Gateway",
+    "description": "Api gateway for Ubademy app",
+    "version": "1.0.0"
+  },
+  "host": "https://ubademy-api-gateway.herokuapp.com/api-gateway",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/block/{userId}": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/unblock/{userId}": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/login": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/categories/{userId}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/categories/user": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/admins": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/admins/login": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/users/favorites/{userId}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/favorites": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/courses": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/courses/{course_id}": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/courses/cancel/{course_id}": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/suscriptions": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/suscriptions/{suscription_id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "suscription_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/suscriptions/course": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/collaborators": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/collaborators/{course_id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/courses/recommendation/{userId}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/courses/inscription": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/courses/students/{courseId}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/courses/inscription/cancel": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/suscriptions/inscription": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/suscriptions/inscription/{userId}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/courses/category": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/exams": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/exams/questions": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/solutions": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/solutions/corrections": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/services": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Services status",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {}
+}
