@@ -29,8 +29,11 @@ exports.getCourses = (req, response) => {
   } else if (req.query["user_id"]) {
     url = `${base_course_service_url}/api/courses?user_id=` + req.query["user_id"];
     logInfo("Url formed:" + url);
-  } else if (req.query["collaborator_id"]) {
+  } else if (req.query["owner_id"]) {
     url = `${base_course_service_url}/api/courses?owner_id=` + req.query["owner_id"];
+    logInfo("Url formed:" + url);
+  } else if (req.query["collaborator_id"]) {
+    url = `${base_course_service_url}/api/courses?collaborator_id=` + req.query["collaborator_id"];
     logInfo("Url formed:" + url);
   }
 
