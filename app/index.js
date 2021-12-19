@@ -174,7 +174,13 @@ apiGatewayRouter.route("/exams")
 
 apiGatewayRouter.route("/exams")
   .post(examServiceController.createExam);
+  
+apiGatewayRouter.route("/exams")
+  .put(examServiceController.editExam);
 
+apiGatewayRouter.route("/exams/publish")
+  .put(examServiceController.publishExam);
+      
 apiGatewayRouter.route("/exams/questions")
   .post(examServiceController.createQuestion);
 
