@@ -406,6 +406,22 @@
         "produces": [],
         "parameters": [],
         "responses": {}
+      },
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/exams/publish": {
+      "put": {
+        "tags": [],
+        "description": "",
+        "produces": [],
+        "parameters": [],
+        "responses": {}
       }
     },
     "/exams/questions": {

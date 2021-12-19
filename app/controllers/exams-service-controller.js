@@ -30,10 +30,17 @@ exports.createQuestion = (req, response) => {
 exports.getSolution = (req, response) => {
     logInfo("Getting solution for user id: " + req.query["userId"]);
 
-    const url = `${base_exams_service_url}/api/solutions?userId=` + req.query["userId"] +
-                "&courseId=" + req.query["courseId"] + 
-                "&examNumber=" + req.query["examNumber"];
-    
+    var url = "";
+
+    if (req.query["user_id"]){
+        url = `${base_exams_service_url}/api/solutions?userId=` + req.query["userId"] +
+        "&courseId=" + req.query["courseId"] + 
+        "&examNumber=" + req.query["examNumber"];
+    } else {
+        url = `${base_exams_service_url}/api/solutions?courseId=` + req.query["courseId"] + 
+        "&examNumber=" + req.query["examNumber"];
+    }
+
     getRequest(url, response, req.headers);
 };
 
