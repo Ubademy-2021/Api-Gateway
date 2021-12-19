@@ -88,3 +88,28 @@ test("Get course recommendations for user should response 200", () => {
     app.close();
   });
 });
+
+test("Get students by course should response 200", () => {
+  return request(app).get("/api-gateway/courses/students/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get suscription inscription for user should response 200", () => {
+  return request(app).get("/api-gateway/suscriptions/inscription/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+
+// ***************** EXAM SERVICE *****************
+
+
+test("Get exams should response 200", () => {
+  return request(app).get("/api-gateway/exams?courseId=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
