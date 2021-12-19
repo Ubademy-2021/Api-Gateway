@@ -222,6 +222,26 @@ test("Get suscription inscription for user should response 200", () => {
   });
 });
 
+test("Create course inscription for user by should response 201", () => {
+  return request(app).post("/api-gateway/courses/inscription").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "userId": 1
+  }).then(response => {
+    expect(response.statusCode).toBe(201);
+    app.close();
+  });
+});
+
+test("Cancel course inscription for user by should response 200", () => {
+  return request(app).put("/api-gateway/courses/inscription/cancel").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "userId": 1
+  }).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
 
 // ***************** EXAM SERVICE *****************
 
