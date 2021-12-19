@@ -113,3 +113,10 @@ test("Get exams should response 200", () => {
     app.close();
   });
 });
+
+test("Get solutions should response 200", () => {
+  return request(app).get("/api-gateway/solutions?courseId=1&examNumber=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
