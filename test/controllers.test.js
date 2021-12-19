@@ -2,11 +2,21 @@
 const app = require("../app/index");
 const request = require("supertest");
 
-var auth_header = {"firebase_authentication": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1NmMwNDEwZmE1MjFjMTZlNDQ2NWE4ZjVjODU5NjZhNWY1MDk5NGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZmlyLWF1dGgtOGJiMjgiLCJhdWQiOiJmaXItYXV0aC04YmIyOCIsImF1dGhfdGltZSI6MTYzOTg4ODA3NSwidXNlcl9pZCI6ImJEWWdVTXVqdk9iMmhZd2lOcTlQRml4Z245cDIiLCJzdWIiOiJiRFlnVU11anZPYjJoWXdpTnE5UEZpeGduOXAyIiwiaWF0IjoxNjM5ODg4MDc1LCJleHAiOjE2Mzk4OTE2NzUsImVtYWlsIjoiZnJhbmNvMTBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImZyYW5jbzEwQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.QelgoFA4mR7yVA36ui5tZDKUAkU6jqEx62uFx6i6jq-jjEGCbOyss3jyy2Jg-f1gYTtJsdGh3j7VsZVWYi6oaU2TY0UQKXWigsUudt_IER6RHK1cdSWrQ77rJV6pPcWqY3oihizONyliXt-X00ZAyi8DtRyY4sG6ZFZqyrrshqSb0QWN4tIPSmghtkmhmLrSNHcIqzJ-j0Whv531HOYYWmzveCoKhmBR75pGmtFpS_e-AleE4Sn3ONxyAMjnhfknJ0GTYEvOpLnz9iTyC-pZwUf8bf8bU6BXmHCCjUrqPAacvg-WF4m8gt25-_7qgrmPZ-tg7irLZwOLyEhjIZX7eA"};
+var auth_header = {"facebook_authentication": "EAAFogA6GZC4cBAG87SOBKPtz25CWq6YQkyulUjiO8ZB6LEBp3LAaUvRqZCdzZAZCB9J1SdPdayfhOvCsKxuxZC127wyqbwGlx3PzKgGZAwOfoV6Apm3eg38lsHroZCasCDIMvQcscJXhoIdPooIspoRpOcaOSYp3DusQ9DMt1i63WaOE4w7pN0oOUreY37GSJcsXdFrMHx2CMU9JHC7c3cpLvLU4kiU8MicNeWd4b3HOVKKktH0K7OAM"};
+var content_type = {"Content-Type":"application/json"};
 
+// ***************** API GATEWAY SERVICE *****************
+
+
+test("Get services up should response 200", () => {
+  return request(app).get("/api-gateway/services?status=up").then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
 
 test("Get services should response 200", () => {
-  return request(app).get("/api-gateway/services?status=up").then(response => {
+  return request(app).get("/api-gateway/services").then(response => {
     expect(response.statusCode).toBe(200);
     app.close();
   });
@@ -33,6 +43,51 @@ test("Get user by id should response 200", () => {
 test("Get user by email should response 200", () => {
   return request(app).get("/api-gateway/users?user_email=franco10@gmail.com").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Update user by id should response 200", () => {
+  return request(app).put("/api-gateway/users/1").set(auth_header).set(content_type).send({
+    "email": "fmariottii@fi.uba.ar",
+    "userName": "fmariottiti",
+    "name": "Franco",
+    "surname": "Mariottiiii",
+    "phoneNumber": "1150464022",
+    "city": "San Isidro",
+    "state": "buenos aires",
+    "country": "Argentina",
+    "address": "juncal capital 1234"
+  }).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Block user should response 200", () => {
+  return request(app).put("/api-gateway/users/block/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Block user already blocked should response 404", () => {
+  return request(app).put("/api-gateway/block/1").set(auth_header).then(response => {    
+    expect(response.statusCode).toBe(404);
+    app.close();
+  });
+});
+
+test("Unblock user should response 200", () => {
+  return request(app).put("/api-gateway/users/unblock/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Unblock user already unblocked should response 400", () => {
+  return request(app).put("/api-gateway/users/unblock/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(400);
     app.close();
   });
 });
@@ -162,6 +217,26 @@ test("Get students by course should response 200", () => {
 
 test("Get suscription inscription for user should response 200", () => {
   return request(app).get("/api-gateway/suscriptions/inscription/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Create course inscription for user by should response 201", () => {
+  return request(app).post("/api-gateway/courses/inscription").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "userId": 1
+  }).then(response => {
+    expect(response.statusCode).toBe(201);
+    app.close();
+  });
+});
+
+test("Cancel course inscription for user by should response 200", () => {
+  return request(app).put("/api-gateway/courses/inscription/cancel").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "userId": 1
+  }).then(response => {
     expect(response.statusCode).toBe(200);
     app.close();
   });
