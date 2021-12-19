@@ -5,9 +5,6 @@ const request = require("supertest");
 var auth_header = {"firebase_authentication": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1NmMwNDEwZmE1MjFjMTZlNDQ2NWE4ZjVjODU5NjZhNWY1MDk5NGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZmlyLWF1dGgtOGJiMjgiLCJhdWQiOiJmaXItYXV0aC04YmIyOCIsImF1dGhfdGltZSI6MTYzOTg4ODA3NSwidXNlcl9pZCI6ImJEWWdVTXVqdk9iMmhZd2lOcTlQRml4Z245cDIiLCJzdWIiOiJiRFlnVU11anZPYjJoWXdpTnE5UEZpeGduOXAyIiwiaWF0IjoxNjM5ODg4MDc1LCJleHAiOjE2Mzk4OTE2NzUsImVtYWlsIjoiZnJhbmNvMTBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImZyYW5jbzEwQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.QelgoFA4mR7yVA36ui5tZDKUAkU6jqEx62uFx6i6jq-jjEGCbOyss3jyy2Jg-f1gYTtJsdGh3j7VsZVWYi6oaU2TY0UQKXWigsUudt_IER6RHK1cdSWrQ77rJV6pPcWqY3oihizONyliXt-X00ZAyi8DtRyY4sG6ZFZqyrrshqSb0QWN4tIPSmghtkmhmLrSNHcIqzJ-j0Whv531HOYYWmzveCoKhmBR75pGmtFpS_e-AleE4Sn3ONxyAMjnhfknJ0GTYEvOpLnz9iTyC-pZwUf8bf8bU6BXmHCCjUrqPAacvg-WF4m8gt25-_7qgrmPZ-tg7irLZwOLyEhjIZX7eA"};
 
 
-// ***************** USER SERVICE *****************
-
-
 test("Get services should response 200", () => {
   return request(app).get("/api-gateway/services?status=up").then(response => {
     expect(response.statusCode).toBe(200);
@@ -15,8 +12,26 @@ test("Get services should response 200", () => {
   });
 });
 
+
+// ***************** USER SERVICE *****************
+
+
 test("Get user should response 200", () => {
   return request(app).get("/api-gateway/users").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get user by id should response 200", () => {
+  return request(app).get("/api-gateway/users?user_id=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get user by email should response 200", () => {
+  return request(app).get("/api-gateway/users?user_email=franco10@gmail.com").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
     app.close();
   });
@@ -56,6 +71,55 @@ test("Get user's favourites courses should response 200", () => {
 
 test("Get all courses should response 200", () => {
   return request(app).get("/api-gateway/courses").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get course by id should response 200", () => {
+  return request(app).get("/api-gateway/courses?course_id=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get course by suscription should response 200", () => {
+  return request(app).get("/api-gateway/courses?suscription_id=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get course by category should response 200", () => {
+  return request(app).get("/api-gateway/courses?category_id=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get active courses should response 200", () => {
+  return request(app).get("/api-gateway/courses?active=true").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get courses for user should response 200", () => {
+  return request(app).get("/api-gateway/courses?user_id=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get courses for owner should response 200", () => {
+  return request(app).get("/api-gateway/courses?owner_id=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get courses for collaborator should response 200", () => {
+  return request(app).get("/api-gateway/courses?collaborator_id=1").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
     app.close();
   });
@@ -116,6 +180,13 @@ test("Get exams should response 200", () => {
 
 test("Get solutions should response 200", () => {
   return request(app).get("/api-gateway/solutions?courseId=1&examNumber=1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Get solutions for user should response 200", () => {
+  return request(app).get("/api-gateway/solutions?userId=1&courseId=1&examNumber=1").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
     app.close();
   });
