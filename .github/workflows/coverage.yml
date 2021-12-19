@@ -4,7 +4,7 @@ on:
   push:
     paths-ignore:
       - 'config.js'
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     paths-ignore:
       - 'config.js'
@@ -28,7 +28,7 @@ jobs:
       run: npm install
 
     - name: Run the tests
-      run: npm test -- --coverage
+      run: npm run test
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1

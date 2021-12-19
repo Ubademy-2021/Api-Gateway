@@ -197,6 +197,8 @@ app.use("/api-gateway", apiGatewayRouter);
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, "public")));
 
-app.listen(port);
+
 logInfo(`Running on port ${port}`);
 logInfo(`Config var BASE_HEROKU_URL is ${base_user_service_url}`);
+
+module.exports = app.listen(port);
