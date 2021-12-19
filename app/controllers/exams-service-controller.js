@@ -1,10 +1,20 @@
 const { logInfo } = require("../utils/log");
 const { base_exams_service_url } = require("../config");
-const { getRequest, postRequest } = require("./request-service");
+const { getRequest, postRequest, putRequest } = require("./request-service");
 
 exports.getExam = (req, response) => {
     logInfo("Getting exam for course id: " + req.query["courseId"]);
     getRequest(`${base_exams_service_url}/api/exams?courseId=` + req.query["courseId"], response, req.headers);
+};
+
+exports.editExam = (req, response) => {
+    logInfo("Editing exam for course id: " + req.body["courseId"]);
+    putRequest(`${base_exams_service_url}/api/exams`, response, req.body, req.headers);
+};
+
+exports.publishExam = (req, response) => {
+    logInfo("Publishing exam " + req.query["examNumber"] + "for course id: " + req.query["courseId"]);
+    putRequest(`${base_exams_service_url}/api/exams/publish`, response, req.body, req.headers);
 };
 
 exports.createExam = (req, response) => {
