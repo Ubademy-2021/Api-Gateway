@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+
 const app = require("../app/index");
 const request = require("supertest");
 
@@ -201,6 +203,14 @@ test("Get all categories should response 200", () => {
   });
 });
 
+test("Cancel course already cancelled should response 400", () => {
+  request(app).put("/api-gateway/courses/cancel/1").set(auth_header);
+  return request(app).put("/api-gateway/courses/cancel/1").set(auth_header).then(response => {
+    expect(response.statusCode).toBe(400);
+    app.close();
+  });
+});
+
 test("Get course recommendations for user should response 200", () => {
   return request(app).get("/api-gateway/courses/recommendation/1").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
@@ -242,8 +252,36 @@ test("Cancel course inscription for user by should response 200", () => {
   });
 });
 
+test("Create category that already exists should response 400", () => {
+  return request(app).post("/api-gateway/categories").set(auth_header).set(content_type).send({
+    "name": "test2"
+  }).then(response => {
+    request(app).post("/api-gateway/categories").set(auth_header).set(content_type).send({
+      "name": "test2"}).
+    then(response => {
+      expect(response.statusCode).toBe(400);
+      app.close();
+    });
+  });
+});
 
-// ***************** EXAM SERVICE *****************
+test("Add category that already exists to course should response 404", () => {
+  return request(app).post("/api-gateway/courses/categories").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "categoryId": 1
+  }).then(response => {
+    request(app).post("/api-gateway/courses/categories").set(auth_header).set(content_type).send({
+      "courseId": 1,
+      "categoryId": 1
+    }).
+    then(response => {
+      expect(response.statusCode).toBe(404);
+      app.close();
+    });
+  });
+});
+
+// // ***************** EXAM SERVICE *****************
 
 
 test("Get exams should response 200", () => {
@@ -263,6 +301,35 @@ test("Get solutions should response 200", () => {
 test("Get solutions for user should response 200", () => {
   return request(app).get("/api-gateway/solutions?userId=1&courseId=1&examNumber=1").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Create solution that already exists for exam should response 400", () => {
+  request(app).post("/api-gateway/solutions").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "examNumber": 1,
+    "userId": 1,
+    "answers": [
+      {
+        "number": 1,
+        "answer": "string"
+      }
+    ]
+  });
+
+  return request(app).post("/api-gateway/solutions").set(auth_header).set(content_type).send({
+    "courseId": 1,
+    "examNumber": 1,
+    "userId": 1,
+    "answers": [
+      {
+        "number": 1,
+        "answer": "string"
+      }
+    ]
+  }).then(response => {
+    expect(response.statusCode).toBe(400);
     app.close();
   });
 });
