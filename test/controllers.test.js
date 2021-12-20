@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+
 const app = require("../app/index");
 const request = require("supertest");
 
