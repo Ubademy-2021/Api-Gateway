@@ -14,7 +14,7 @@ exports.editExam = (req, response) => {
 
 exports.publishExam = (req, response) => {
     logInfo("Publishing exam " + req.query["examNumber"] + "for course id: " + req.query["courseId"]);
-    putRequest(`${base_exams_service_url}/api/exams/publish`, response, req.body, req.headers);
+    putRequest(`${base_exams_service_url}/api/exams/publish?courseId=`+req.query["courseId"]+"&examNumber="+req.query["examNumber"], response, req.body, req.headers);
 };
 
 exports.createExam = (req, response) => {
