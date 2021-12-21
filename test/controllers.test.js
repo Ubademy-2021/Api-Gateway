@@ -353,13 +353,3 @@ test("Create solution that already exists for exam should response 400", () => {
     app.close();
   });
 });
-
-test("Cancel course inscription for user should response 200", () => {
-  return request(app).put("/api-gateway/courses/inscription/cancel").set(auth_header).set(content_type).send({
-    "courseId": 1,
-    "userId": 1
-  }).then(response => {
-    expect(response.statusCode).toBe(200);
-    app.close();
-  });
-});
