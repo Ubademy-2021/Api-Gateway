@@ -122,6 +122,26 @@ test("Get user's favourites courses should response 200", () => {
   });
 });
 
+test("Add favorite course for user should response 201", () => {
+  return request(app).post("/api-gateway/users/favorites").set(auth_header).set(content_type).send({
+    "userId": 1,
+    "courseId": 1
+  }).then(response => {
+    expect(response.statusCode).toBe(201);
+    app.close();
+  });
+});
+
+test("Delete favorite course for user should response 201", () => {
+  return request(app).delete("/api-gateway/users/favorites").set(auth_header).set(content_type).send({
+    "userId": 1,
+    "courseId": 1
+  }).then(response => {
+    expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
 
 // ***************** COURSE SERVICE *****************
 
