@@ -6,6 +6,8 @@ const request = require("supertest");
 
 var auth_header = {"firebase_authentication": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1NmMwNDEwZmE1MjFjMTZlNDQ2NWE4ZjVjODU5NjZhNWY1MDk5NGIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZmlyLWF1dGgtOGJiMjgiLCJhdWQiOiJmaXItYXV0aC04YmIyOCIsImF1dGhfdGltZSI6MTY0MDA2MjQyMCwidXNlcl9pZCI6InZtRkRIMUN5VjVNcEdRcHJiMHUyZTNOd3ZJQjMiLCJzdWIiOiJ2bUZESDFDeVY1TXBHUXByYjB1MmUzTnd2SUIzIiwiaWF0IjoxNjQwMDYyNDIwLCJleHAiOjE2NDAwNjYwMjAsImVtYWlsIjoibWFydGlubG9wZXpAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbIm1hcnRpbmxvcGV6QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.o4pGGNz4E3EW7v1zFuIfl02bovHYOrS5OJJqzssM9Io64hnRmq1zvcky1m0dsblH-02GPBoqxulYlGXImcYq3lOMXJT5rVsPPM1ph6TY5Lb_ufpkT6vvNWVMPfciMN6tqf9OFjdS7oR5n9CNhRtxoyNyIxoTd4i8uUam8Cx2bo051cmghVQsrahhDovp1J0oB6C_EZJYrpgQ4hpkv_5CUP07X8dL0o8nh9wRL_ApG2P8eDOpMFmt0yVCE0ZA9cl3UcdvZzUKmFUTYya-WsgvWtagaxAQxo25ME-4OIv3gMgZTw1sq4AXuFxsBr3WZBv_a8S8osYhj3fAtZExVr4fGg"};
 var content_type = {"Content-Type":"application/json"};
+var auth_header_admin = {"admin_authentication":"test"};
+
 
 // ***************** API GATEWAY SERVICE *****************
 
@@ -97,6 +99,13 @@ test("Unblock user already unblocked should response 400", () => {
 test("Get admin should response 200", () => {
   return request(app).get("/api-gateway/admins").set(auth_header).then(response => {
     expect(response.statusCode).toBe(200);
+    app.close();
+  });
+});
+
+test("Login admin with fake token response 404", () => {
+  return request(app).get("/api-gateway/admins/login").set(auth_header_admin).then(response => {
+    expect(response.statusCode).toBe(404);
     app.close();
   });
 });
